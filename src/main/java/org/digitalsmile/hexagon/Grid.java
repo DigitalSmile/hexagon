@@ -6,7 +6,7 @@ import org.digitalsmile.hexagon.layout.Orientation;
 import org.digitalsmile.hexagon.layout.Point;
 import org.digitalsmile.hexagon.shapes.Bounds;
 import org.digitalsmile.hexagon.shapes.Shape;
-import org.digitalsmile.hexagon.shapes.hexagon.HexagonBounds;
+import org.digitalsmile.hexagon.shapes.hexagonal.HexagonalBounds;
 import org.digitalsmile.hexagon.shapes.rectangle.RectangleBounds;
 import org.digitalsmile.hexagon.storage.HexagonMetaObjectHook;
 import org.digitalsmile.hexagon.storage.HexagonMetaObjectStorage;
@@ -102,9 +102,9 @@ public class Grid {
             return this;
         }
 
-        public HexagonGridBuilder hexagonShape(HexagonBounds hexagonBounds) {
+        public HexagonGridBuilder hexagonShape(HexagonalBounds hexagonalBounds) {
             this.shape = Shape.HEXAGON;
-            this.bounds = hexagonBounds;
+            this.bounds = hexagonalBounds;
             return this;
         }
 

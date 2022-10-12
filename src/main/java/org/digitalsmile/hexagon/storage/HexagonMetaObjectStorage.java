@@ -13,6 +13,7 @@ public class HexagonMetaObjectStorage<T> {
 
     public void hexagonObjectCreated(Hexagon hexagon) {
         if (hook == null) {
+            dataMap.put(hexagon, null);
             return;
         }
         var object = hook.onHexagonCreate(hexagon);

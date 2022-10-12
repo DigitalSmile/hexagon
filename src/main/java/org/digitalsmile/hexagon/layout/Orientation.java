@@ -1,6 +1,7 @@
 package org.digitalsmile.hexagon.layout;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 public enum Orientation {
     POINTY(Math.sqrt(3.0d), Math.sqrt(3.0d) / 2.0d, 0.0d, 3.0d / 2.0d, Math.sqrt(3.0d) / 3.0d, -1.0d / 3.0d, 0.0d, 2.0d / 3.0d, 0.5d),
@@ -26,22 +27,12 @@ public enum Orientation {
         this.b1 = b1;
         this.b2 = b2;
         this.b3 = b3;
-        this.sinCornerList = List.of(
-                Math.sin(2d * Math.PI * (startAngle) / 6d),
-                Math.sin(2d * Math.PI * (startAngle + 1) / 6d),
-                Math.sin(2d * Math.PI * (startAngle + 2) / 6d),
-                Math.sin(2d * Math.PI * (startAngle + 3) / 6d),
-                Math.sin(2d * Math.PI * (startAngle + 4) / 6d),
-                Math.sin(2d * Math.PI * (startAngle + 5) / 6d)
-        );
-        this.cosCornerList = List.of(
-                Math.cos(2d * Math.PI * (startAngle) / 6d),
-                Math.cos(2d * Math.PI * (startAngle + 1) / 6d),
-                Math.cos(2d * Math.PI * (startAngle + 2) / 6d),
-                Math.cos(2d * Math.PI * (startAngle + 3) / 6d),
-                Math.cos(2d * Math.PI * (startAngle + 4) / 6d),
-                Math.cos(2d * Math.PI * (startAngle + 5) / 6d)
-        );
+        this.sinCornerList = IntStream.range(0, 6)
+                .mapToObj(value -> Math.sin(2d * Math.PI * (startAngle + value) / 6d))
+                .toList();
+        this.cosCornerList = IntStream.range(0, 6)
+                .mapToObj(value -> Math.cos(2d * Math.PI * (startAngle + value) / 6d))
+                .toList();
     }
 
     double pixelCoordinateX(Hexagon hexagon, double sizeX) {
