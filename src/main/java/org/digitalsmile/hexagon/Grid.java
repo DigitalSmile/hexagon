@@ -89,6 +89,8 @@ public class Grid {
 
         private HexagonMetaObjectHook<?> objectCreationHook;
 
+        private static final String SIZE_ERROR = "You should specify width, height or side of hexagon, but not combination!";
+
         public HexagonGridBuilder orientation(Orientation orientation) {
             this.orientation = orientation;
             return this;
@@ -118,7 +120,7 @@ public class Grid {
 
         public HexagonGridBuilder hexagonWidth(double hexagonWidth) {
             if (this.hexagonHeight != 0 || this.side != 0) {
-                throw new IllegalArgumentException("You should specify width, height or side of hexagon, but not combination!");
+                throw new IllegalArgumentException(SIZE_ERROR);
             }
             this.hexagonWidth = hexagonWidth;
             return this;
@@ -126,7 +128,7 @@ public class Grid {
 
         public HexagonGridBuilder hexagonHeight(double hexagonHeight) {
             if (this.hexagonWidth != 0 || this.side != 0) {
-                throw new IllegalArgumentException("You should specify width, height or side of hexagon, but not combination!");
+                throw new IllegalArgumentException(SIZE_ERROR);
             }
             this.hexagonHeight = hexagonHeight;
             return this;
@@ -134,7 +136,7 @@ public class Grid {
 
         public HexagonGridBuilder side(double side) {
             if (this.hexagonWidth != 0 || this.hexagonHeight != 0) {
-                throw new IllegalArgumentException("You should specify width, height or side of hexagon, but not combination!");
+                throw new IllegalArgumentException(SIZE_ERROR);
             }
             this.side = side;
             return this;

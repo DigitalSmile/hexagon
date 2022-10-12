@@ -9,7 +9,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Tag("HexagonTest")
-public class HexagonTest {
+class HexagonTest {
 
     @Test
     void testHexagonThrows() {

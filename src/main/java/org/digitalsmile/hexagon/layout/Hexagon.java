@@ -10,7 +10,6 @@ public record Hexagon(int q, int r, int s) {
         if (q + r + s != 0) {
             throw new IllegalArgumentException("q + r + s must be 0");
         }
-
     }
 
     public Hexagon add(Hexagon hexagon) {
@@ -73,28 +72,6 @@ public record Hexagon(int q, int r, int s) {
                 .mapToObj(value -> hexagon1Nudge.interpolate(hexagon2Nudge, step * value).roundToHexagon())
                 .toList();
     }
-
-//    @Override
-//    public int hashCode() {
-//        final int prime = 31;
-//        int result = 1;
-//        result = prime * result + q;
-//        result = prime * result + r;
-//        result = prime * result + s;
-//        return result;
-//    }
-//
-//    @Override
-//    public boolean equals(Object obj) {
-//        if (this == obj) return true;
-//        if (obj == null) return false;
-//        if (!getClass().isAssignableFrom(obj.getClass())) return false;
-//        Hexagon other = (Hexagon) obj;
-//        if (q != other.q()) return false;
-//        if (r != other.r()) return false;
-//        if (s != other.s()) return false;
-//        return true;
-//    }
 
     @Override
     public String toString() {

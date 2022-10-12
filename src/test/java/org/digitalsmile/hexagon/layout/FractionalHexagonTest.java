@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @Tag("FractionalHexagonTest")
-public class FractionalHexagonTest {
+class FractionalHexagonTest {
 
     @Test
     void testFractionalHexagonThrows() {

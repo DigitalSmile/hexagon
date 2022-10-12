@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @Tag("HexagonDirectionTest")
-public class HexagonDirectionTest {
+class HexagonDirectionTest {
 
     @Test
     void testNextCounterClockWiseDirection() {

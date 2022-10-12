@@ -2,6 +2,10 @@ package org.digitalsmile.hexagon.layout;
 
 import java.util.Arrays;
 
+/**
+ * Provides values for determine direction of hexagon side.
+ * Direction follows counterclockwise rule, so do the indexing.
+ */
 public enum HexagonDirection {
     NORTH(0, 0f, new Hexagon(0, -1, 1)),
     NORTH_WEST(1, 60f, new Hexagon(-1, 0, 1)),

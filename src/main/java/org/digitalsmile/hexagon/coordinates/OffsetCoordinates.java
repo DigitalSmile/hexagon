@@ -5,8 +5,10 @@ import org.digitalsmile.hexagon.layout.Orientation;
 
 public record OffsetCoordinates(int row, int col) {
 
-    static public OffsetCoordinates fromCube(Orientation orientation, Hexagon hexagon) {
-        int col, row, offset;
+    public static OffsetCoordinates fromCube(Orientation orientation, Hexagon hexagon) {
+        int col;
+        int row;
+        int offset;
         switch (orientation){
             case POINTY -> {
                 offset = hexagon.r() % 2 == 0 ? 1 : -1;
@@ -24,8 +26,11 @@ public record OffsetCoordinates(int row, int col) {
     }
 
 
-    static public Hexagon toCube(Orientation orientation, OffsetCoordinates offsetCoordinates) {
-        int q, r, s, offset;
+    public static Hexagon toCube(Orientation orientation, OffsetCoordinates offsetCoordinates) {
+        int q;
+        int r;
+        int s;
+        int offset;
         switch (orientation){
             case POINTY -> {
                 offset = offsetCoordinates.row % 2 == 0 ? 1 : -1;

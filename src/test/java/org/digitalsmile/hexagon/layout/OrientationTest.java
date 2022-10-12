@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Tag("OrientationTest")
-public class OrientationTest {
+class OrientationTest {
 
     @Test
     void testPixelCoordinate() {
