@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'jacoco'
+    id "org.sonarqube" version "3.4.0.2513"
 }
 
 group 'org.digitalsmile'
@@ -32,6 +33,14 @@ jacocoTestReport {
     reports {
         xml.required = true
         csv.required = false
+    }
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "DigitalSmile_hexagon"
+        property "sonar.organization", "digitalsmile"
+        property "sonar.host.url", "https://sonarcloud.io"
     }
 }
 
