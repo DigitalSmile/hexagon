@@ -3,8 +3,19 @@ package org.digitalsmile.hexagon.coordinates;
 import org.digitalsmile.hexagon.layout.Hexagon;
 import org.digitalsmile.hexagon.layout.Orientation;
 
+/**
+ * Record class to represent offset coordinates of hexagon in a {@link org.digitalsmile.hexagon.Grid} as described <a href="https://www.redblobgames.com/grids/hexagons/#coordinates-offset">here</a>.
+ * @param row - row index of hexagon
+ * @param col - column index of hexagon
+ */
 public record OffsetCoordinates(int row, int col) {
 
+    /**
+     * Creates offset coordinates from given hexagon and orientation.
+     * @param orientation - orientation of hexagon
+     * @param hexagon - provided hexagon
+     * @return offset coordinates of provided hexagon
+     */
     public static OffsetCoordinates fromCube(Orientation orientation, Hexagon hexagon) {
         int col;
         int row;
@@ -25,7 +36,12 @@ public record OffsetCoordinates(int row, int col) {
         return new OffsetCoordinates(row, col);
     }
 
-
+    /**
+     * Creates hexagon from given offset coordinates and orientation.
+     * @param orientation - orientation of hexagon
+     * @param offsetCoordinates - offset coordinates
+     * @return hexagon of provided offset coordinates
+     */
     public static Hexagon toCube(Orientation orientation, OffsetCoordinates offsetCoordinates) {
         int q;
         int r;

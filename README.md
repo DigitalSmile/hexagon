@@ -13,7 +13,10 @@ The code and the library itself are highly inspired by blog posts from @redblobg
 ## Features
 - Pure Java 17+ library
 - Zero Dependencies
+- Supports regular hexagons with flat or pointy orientation 
 - Supports custom object to be tied to hexagon
 - Supports grid creation via simple builder
+- Supports rectangle and hexagonal grids
 
-Features roadmap - https://github.com/users/DigitalSmile/projects/1
+## Next milestone - Mercury
+![GitHub milestone](https://img.shields.io/github/milestones/progress-percent/DigitalSmile/hexagon/1)
