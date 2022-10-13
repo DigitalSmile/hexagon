@@ -1,10 +1,11 @@
 package org.digitalsmile.hexagon.coordinates;
 
+import org.digitalsmile.hexagon.HexagonGrid;
 import org.digitalsmile.hexagon.layout.Hexagon;
 import org.digitalsmile.hexagon.layout.Orientation;
 
 /**
- * Record class to represent offset coordinates of hexagon in a {@link org.digitalsmile.hexagon.Grid} as described <a href="https://www.redblobgames.com/grids/hexagons/#coordinates-offset">here</a>.
+ * Record class to represent offset coordinates of hexagon in a {@link HexagonGrid} as described <a href="https://www.redblobgames.com/grids/hexagons/#coordinates-offset">here</a>.
  *
  * @param row - row index of hexagon
  * @param col - column index of hexagon

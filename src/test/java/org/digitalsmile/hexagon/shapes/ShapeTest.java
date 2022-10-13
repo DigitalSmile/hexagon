@@ -18,7 +18,7 @@ public class ShapeTest {
         var dataStorage = new HexagonMetaObjectStorage<>();
         Shape.HEXAGONAL.createShape(hexagonalBounds, dataStorage, Orientation.POINTY);
         assertEquals(37, dataStorage.getHexagons().size());
-        dataStorage.clearHexagons();
+        dataStorage.clear();
         Shape.HEXAGONAL.createShape(hexagonalBounds, dataStorage, Orientation.FLAT);
         assertEquals(37, dataStorage.getHexagons().size());
     }
@@ -29,15 +29,15 @@ public class ShapeTest {
         var dataStorage = new HexagonMetaObjectStorage<>();
         Shape.RECTANGLE.createShape(rectangleBounds, dataStorage, Orientation.POINTY);
         assertEquals(9, dataStorage.getHexagons().size());
-        dataStorage.clearHexagons();
+        dataStorage.clear();
         Shape.RECTANGLE.createShape(rectangleBounds, dataStorage, Orientation.FLAT);
         assertEquals(9, dataStorage.getHexagons().size());
-        dataStorage.clearHexagons();
+        dataStorage.clear();
 
         rectangleBounds = new RectangleBounds(1, 3 , 1, 1);
         Shape.RECTANGLE.createShape(rectangleBounds, dataStorage, Orientation.POINTY);
         assertEquals(3, dataStorage.getHexagons().size());
-        dataStorage.clearHexagons();
+        dataStorage.clear();
         Shape.RECTANGLE.createShape(rectangleBounds, dataStorage, Orientation.FLAT);
         assertEquals(3, dataStorage.getHexagons().size());
     }

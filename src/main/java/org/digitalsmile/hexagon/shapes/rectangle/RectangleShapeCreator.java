@@ -21,7 +21,7 @@ public class RectangleShapeCreator implements ShapeCreator<RectangleBounds> {
                         IntStream.rangeClosed(rectangleBounds.top() - qOffset, rectangleBounds.bottom() - qOffset)
                                 .forEach(r -> {
                                     var hexagon = new Hexagon(q, r, -q - r);
-                                    dataStorage.hexagonObjectCreated(hexagon);
+                                    dataStorage.addHexagon(hexagon);
                                 });
                     });
             case POINTY -> IntStream.rangeClosed(rectangleBounds.top(), rectangleBounds.bottom())
@@ -30,7 +30,7 @@ public class RectangleShapeCreator implements ShapeCreator<RectangleBounds> {
                         IntStream.rangeClosed(rectangleBounds.left() - rOffset, rectangleBounds.right() - rOffset)
                                 .forEach(q -> {
                                     var hexagon = new Hexagon(q, r, -q - r);
-                                    dataStorage.hexagonObjectCreated(hexagon);
+                                    dataStorage.addHexagon(hexagon);
                                 });
                     });
             default -> throw new IllegalStateException("Unexpected value: " + orientation);

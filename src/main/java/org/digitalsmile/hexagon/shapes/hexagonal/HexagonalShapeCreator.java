@@ -20,7 +20,7 @@ public class HexagonalShapeCreator implements ShapeCreator<HexagonalBounds> {
                     IntStream.rangeClosed(r1, r2)
                             .forEach(r -> {
                                 var hexagon = new Hexagon(q, r, -q - r);
-                                dataStorage.hexagonObjectCreated(hexagon);
+                                dataStorage.addHexagon(hexagon);
                             });
                 });
     }

@@ -14,15 +14,20 @@ import org.digitalsmile.hexagon.storage.HexagonMetaObjectStorage;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
-public class Grid {
+/**
+ * Main class that represents grid of hexagons with
+ */
+public class HexagonGrid {
     private final Shape shape;
     private final Bounds bounds;
     private final HexagonMetaObjectStorage<?> dataStorage;
     private final Layout layout;
 
-    private Grid(HexagonGridBuilder builder) {
+    private HexagonGrid(HexagonGridBuilder builder) {
         this.bounds = builder.bounds;
         this.shape = builder.shape;
         this.dataStorage = new HexagonMetaObjectStorage<>(builder.objectCreationHook);
@@ -76,24 +81,46 @@ public class Grid {
         return new LayoutProps(hexagonWidth, hexagonHeight, side);
     }
 
+    /**
+     * Generates hexagon grid with props provided earlier.
+     */
     public void generateHexagons() {
         shape.createShape(bounds, dataStorage, layout.getOrientation());
     }
 
+    /**
+     * Gets list of hexagons. The list is unmodifiable.
+     * @return unmodifiable list of hexagons
+     */
     public List<Hexagon> getHexagons() {
         return Collections.unmodifiableList(dataStorage.getHexagons());
     }
 
+    /**
+     * Gets meta objects by provided hexagon.
+     * @param hexagon - provided hexagon
+     * @return meta object
+     * @param <T> type of meta object
+     */
     @SuppressWarnings("unchecked")
     public <T> T getHexagonDataObject(Hexagon hexagon) {
         return (T) dataStorage.getHexagonDataObject(hexagon);
     }
 
+    /**
+     * Gets list of all meta objects.
+     * @return list of meta objects
+     * @param <T> type of meta objects
+     */
     @SuppressWarnings("unchecked")
     public <T> List<T> getHexagonDataObjects() {
         return (List<T>) dataStorage.getHexagonDataObjects();
     }
 
+    /**
+     * Gets layout of grid creates.
+     * @return grid layout object
+     */
     public Layout getLayout() {
         return layout;
     }
@@ -106,7 +133,7 @@ public class Grid {
 //        return layout.getHexagonHeight() * (rows + 1);
 //    }
 
-    //TODO: think about HexagonDataObject (WeakReference?)
+
     public List<Hexagon> getRange(Hexagon centerHexagon, int range) {
         return IntStream.rangeClosed(-range, range)
                 .mapToObj(q -> {
@@ -123,6 +150,9 @@ public class Grid {
                 .toList();
     }
 
+    /**
+     * Builder for creating hexagon grid.
+     */
     public static class HexagonGridBuilder {
         private Orientation orientation;
         private Shape shape;
@@ -193,8 +223,18 @@ public class Grid {
             return this;
         }
 
-        public Grid build() {
-            return new Grid(this);
+        public HexagonGrid build() {
+            if (Objects.isNull(orientation)) {
+                throw new IllegalArgumentException("You have to define Orientation for hexagon in order to create a grid!");
+            }
+            if (Objects.isNull(shape) || Objects.isNull(bounds)) {
+                throw new IllegalArgumentException("You have to define Shape and Bounds for a grid!");
+            }
+            var emptyProps = Stream.of(hexagonWidth, hexagonHeight, side).filter(value -> value == 0).count();
+            if (emptyProps == 3) {
+                throw new IllegalArgumentException("You have to define at least one of third props - hexagonWidth/hexagonHeight/side - to create a grid!");
+            }
+            return new HexagonGrid(this);
         }
     }
 }

@@ -1,7 +1,9 @@
 package org.digitalsmile.hexagon.layout;
 
+import org.digitalsmile.hexagon.HexagonGrid;
+
 /**
- * Utility hexagon class for interpolating and rounding physical coordinates (e.g. pixels) to exact hexagon on the {@link org.digitalsmile.hexagon.Grid}.
+ * Utility hexagon class for interpolating and rounding physical coordinates (e.g. pixels) to exact hexagon on the {@link HexagonGrid}.
  *
  * @param q - fuzzy q coordinates of hexagon
  * @param r - fuzzy r coordinates of hexagon
@@ -16,7 +18,7 @@ record FractionalHexagon(double q, double r, double s) {
     }
 
     /**
-     * Rounds FractionalHexagon to the hexagon on the {@link org.digitalsmile.hexagon.Grid}.
+     * Rounds FractionalHexagon to the hexagon on the {@link HexagonGrid}.
      *
      * @return hexagon with exact coordinates
      */

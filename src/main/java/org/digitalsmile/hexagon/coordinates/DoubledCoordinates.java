@@ -1,9 +1,10 @@
 package org.digitalsmile.hexagon.coordinates;
 
+import org.digitalsmile.hexagon.HexagonGrid;
 import org.digitalsmile.hexagon.layout.Hexagon;
 
 /**
- * Record class to represent doubled coordinates of hexagon in a {@link org.digitalsmile.hexagon.Grid} as described <a href="https://www.redblobgames.com/grids/hexagons/#coordinates-doubled">here</a>.
+ * Record class to represent doubled coordinates of hexagon in a {@link HexagonGrid} as described <a href="https://www.redblobgames.com/grids/hexagons/#coordinates-doubled">here</a>.
  *
  * @param row - row index of hexagon
  * @param col - column index of hexagon
