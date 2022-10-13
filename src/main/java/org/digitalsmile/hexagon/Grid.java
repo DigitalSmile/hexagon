@@ -27,7 +27,53 @@ public class Grid {
         this.shape = builder.shape;
         this.dataStorage = new HexagonMetaObjectStorage<>(builder.objectCreationHook);
 
-        this.layout = new Layout(builder.orientation, builder.hexagonWidth, builder.hexagonHeight, builder.side, new Point(builder.offsetX, builder.offsetY));
+        var layoutProps = calculateLayoutProps(builder);
+        this.layout = new Layout(builder.orientation,
+                layoutProps.hexagonWidth(), layoutProps.hexagonHeight(), layoutProps.side(),
+                new Point(builder.offsetX, builder.offsetY));
+    }
+
+    private record LayoutProps(double hexagonWidth, double hexagonHeight, double side) {
+    }
+
+    private LayoutProps calculateLayoutProps(HexagonGridBuilder builder) {
+        double hexagonWidth;
+        double hexagonHeight;
+        double side;
+        switch (builder.orientation) {
+            case FLAT -> {
+                if (builder.hexagonWidth != 0) {
+                    hexagonWidth = builder.hexagonWidth;
+                    side = builder.hexagonWidth / 2d;
+                    hexagonHeight = side * Math.sqrt(3.0);
+                } else if (builder.hexagonHeight != 0) {
+                    hexagonHeight = builder.hexagonHeight;
+                    side = builder.hexagonHeight / Math.sqrt(3.0);
+                    hexagonWidth = side * 2d;
+                } else {
+                    side = builder.side;
+                    hexagonWidth = side * 2d;
+                    hexagonHeight = side * Math.sqrt(3.0);
+                }
+            }
+            case POINTY -> {
+                if (builder.hexagonWidth != 0) {
+                    hexagonWidth = builder.hexagonWidth;
+                    side = builder.hexagonWidth / Math.sqrt(3.0);
+                    hexagonHeight = side * 2d;
+                } else if (builder.hexagonHeight != 0) {
+                    hexagonHeight = builder.hexagonHeight;
+                    side = builder.hexagonHeight / 2d;
+                    hexagonWidth = side * Math.sqrt(3.0);
+                } else {
+                    side = builder.side;
+                    hexagonWidth = side * Math.sqrt(3.0);
+                    hexagonHeight = side * 2d;
+                }
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + builder.orientation);
+        }
+        return new LayoutProps(hexagonWidth, hexagonHeight, side);
     }
 
     public void generateHexagons() {

@@ -3,6 +3,9 @@ package org.digitalsmile.hexagon.layout;
 import java.util.List;
 import java.util.stream.IntStream;
 
+/**
+ * Class that represents computation of layout props by provided {@link Orientation}.
+ */
 public class Layout {
     private final Orientation orientation;
     private final double hexagonWidth;
@@ -10,51 +13,41 @@ public class Layout {
     private final double side;
     private final Point offset;
 
+    /**
+     * Creates layout by provided props of hexagon.
+     *
+     * @param orientation   - {@link Orientation} of hexagon
+     * @param hexagonWidth  - width of hexagon
+     * @param hexagonHeight - height of hexagon
+     * @param side          - side of hexagon
+     * @param offset        - offset coordinates (x and y) of the first hexagon
+     */
     public Layout(Orientation orientation, double hexagonWidth, double hexagonHeight, double side, Point offset) {
         this.orientation = orientation;
+        this.hexagonWidth = hexagonWidth;
+        this.hexagonHeight = hexagonHeight;
+        this.side = side;
         this.offset = offset;
-
-        switch (orientation) {
-            case FLAT -> {
-                if (hexagonWidth != 0) {
-                    this.hexagonWidth = hexagonWidth;
-                    this.side = hexagonWidth / 2d;
-                    this.hexagonHeight = this.side * Math.sqrt(3.0);
-                } else if (hexagonHeight != 0) {
-                    this.hexagonHeight = hexagonHeight;
-                    this.side = hexagonHeight / Math.sqrt(3.0);
-                    this.hexagonWidth = this.side * 2d;
-                } else {
-                    this.side = side;
-                    this.hexagonWidth = this.side * 2d;
-                    this.hexagonHeight = this.side * Math.sqrt(3.0);
-                }
-            }
-            case POINTY -> {
-                if (hexagonWidth != 0) {
-                    this.hexagonWidth = hexagonWidth;
-                    this.side = hexagonWidth / Math.sqrt(3.0);
-                    this.hexagonHeight = this.side * 2d;
-                } else if (hexagonHeight != 0) {
-                    this.hexagonHeight = hexagonHeight;
-                    this.side = hexagonHeight / 2d;
-                    this.hexagonWidth = this.side * Math.sqrt(3.0);
-                } else {
-                    this.side = side;
-                    this.hexagonWidth = this.side * Math.sqrt(3.0);
-                    this.hexagonHeight = this.side * 2d;
-                }
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + orientation);
-        }
     }
 
+    /**
+     * Gets the center of hexagon with X and Y coordinates.
+     *
+     * @param hexagon - provided hexagon to calculate
+     * @return X and Y representation of center point of hexagon
+     */
     public Point getHexagonCenterPoint(Hexagon hexagon) {
         var x = orientation.pixelCoordinateX(hexagon, side) + hexagonWidth / 2d;
         var y = orientation.pixelCoordinateY(hexagon, side) + hexagonHeight / 2d;
         return new Point(x + offset.x(), y + offset.y());
     }
 
+    /**
+     * Gets the hexagon by provided X and Y coordinates.
+     *
+     * @param point - X and Y coordinates to get hexagon
+     * @return hexagon underneath X and Y coordinates
+     */
     public Hexagon getBoundingHexagon(Point point) {
         var adjustedPoint = new Point((point.x() - offset.x()) / side, (point.y() - offset.y()) / side);
         var q = orientation.hexagonCoordinateQ(adjustedPoint);
@@ -62,10 +55,17 @@ public class Layout {
         return new FractionalHexagon(q, r, -q - r).roundToHexagon();
     }
 
-    public Point getHexagonCornerPoint(int corner) {
+    private Point getHexagonCornerPoint(int corner) {
         return new Point(side * orientation.getCosCorner(corner), side * orientation.getSinCorner(corner));
     }
 
+    /**
+     * Gets X and Y coordinates of each corner of provided hexagon with layout offset.
+     * Can be used to render hexagons.
+     *
+     * @param hexagon - provided hexagon
+     * @return list of X and Y corner coordinates of provided hexagon
+     */
     public List<Point> getHexagonPoints(Hexagon hexagon) {
         var center = getHexagonCenterPoint(hexagon);
         return IntStream.range(0, 6).mapToObj(value -> {
@@ -74,23 +74,50 @@ public class Layout {
         }).toList();
     }
 
+    /**
+     * Gets hexagon {@link Orientation} in current layout.
+     *
+     * @return layout orientation
+     */
     public Orientation getOrientation() {
         return orientation;
     }
 
+    /**
+     * Gets hexagon width in current layout.
+     *
+     * @return width of hexagon
+     */
     public double getHexagonWidth() {
         return hexagonWidth;
     }
 
+    /**
+     * Gets hexagon height in current layout.
+     *
+     * @return height of hexagon
+     */
     public double getHexagonHeight() {
         return hexagonHeight;
     }
 
+    /**
+     * Gets hexagon side in current layout.
+     *
+     * @return sid of hexagon
+     */
+    public double getSide() {
+        return side;
+    }
+
+    /**
+     * Gets layout offset in X and Y coordinates.
+     *
+     * @return X and Y coordinates of offset
+     */
     public Point getOffset() {
         return offset;
     }
 
-    public double getSide() {
-        return side;
-    }
+
 }

@@ -3,6 +3,17 @@ package org.digitalsmile.hexagon.layout;
 import java.util.List;
 import java.util.stream.IntStream;
 
+/**
+ * Class that represents hexagon orientation.
+ *       /\       __
+ *      | |     /   \
+ *      \/      \__/
+ *    Pointy    Flat
+ *
+ * All conversion constants are hardcoded and computed on the very start.
+ * @see <a href="https://www.redblobgames.com/grids/hexagons/#hex-to-pixel">Hex to Pixel</a>
+ * @see <a href="https://www.redblobgames.com/grids/hexagons/#pixel-to-hex">Pixel to Hex</a>
+ */
 public enum Orientation {
     POINTY(Math.sqrt(3.0d), Math.sqrt(3.0d) / 2.0d, 0.0d, 3.0d / 2.0d, Math.sqrt(3.0d) / 3.0d, -1.0d / 3.0d, 0.0d, 2.0d / 3.0d, 0.5d),
     FLAT(3.0d / 2.0d, 0.0d, Math.sqrt(3.0d) / 2.0d, Math.sqrt(3.0d), 2.0d / 3.0d, 0.0d, -1.0d / 3.0d, Math.sqrt(3.0d) / 3.0d, 0d);
@@ -35,26 +46,58 @@ public enum Orientation {
                 .toList();
     }
 
-    double pixelCoordinateX(Hexagon hexagon, double sizeX) {
-        return (f0 * hexagon.q() + f1 * hexagon.r()) * sizeX;
+    /**
+     * Converts hexagon q and r cube coordinates to X coordinate in 2D representation.
+     * @param hexagon - provided hexagon
+     * @param side - side size of hexagon
+     * @return X-axis pixel representation of hexagon
+     */
+    double pixelCoordinateX(Hexagon hexagon, double side) {
+        return (f0 * hexagon.q() + f1 * hexagon.r()) * side;
     }
 
-    double pixelCoordinateY(Hexagon hexagon, double sizeY) {
-        return (f2 * hexagon.q() + f3 * hexagon.r()) * sizeY;
+    /**
+     * Converts hexagon q and r cube coordinates to Y coordinate in 2D representation.
+     * @param hexagon - provided hexagon
+     * @param side - side size of hexagon
+     * @return Y-axis pixel representation of hexagon
+     */
+    double pixelCoordinateY(Hexagon hexagon, double side) {
+        return (f2 * hexagon.q() + f3 * hexagon.r()) * side;
     }
 
+    /**
+     * Converts X and Y pixel coordinate to q coordinate fo hexagon.
+     * @param point - x and y coordinate
+     * @return q coordinate of hexagon in a point
+     */
     double hexagonCoordinateQ(Point point) {
         return b0 * point.x() + b1 * point.y();
     }
 
+    /**
+     * Converts X and Y pixel coordinate to r coordinate fo hexagon.
+     * @param point - x and y coordinate
+     * @return r coordinate of hexagon in a point
+     */
     double hexagonCoordinateR(Point point) {
         return b2 * point.x() + b3 * point.y();
     }
 
+    /**
+     * Gets the sine value of the corner (0 to 5) of hexagon. The value is precomputed.
+     * @param corner - corner value of hexagon (0 to 5)
+     * @return sinus value of hexagon corner
+     */
     double getSinCorner(int corner) {
         return sinCornerList.get(corner);
     }
 
+    /**
+     * Gets the cosine value of the corner (0 to 5) of hexagon. The value is precomputed.
+     * @param corner - corner value of hexagon (0 to 5)
+     * @return cosine value of hexagon corner
+     */
     double getCosCorner(int corner) {
         return cosCornerList.get(corner);
     }

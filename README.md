@@ -8,7 +8,7 @@
 
 Small and pure Java library to deal with hexagons math and operations with zero dependencies. The library provides an abstract level of hexagon manipulation and is render engine agnostic, so it can be used with any type of visual libraries (AWT, JavaFX, libGDX, etc.)
 
-The code and the library itself are highly inspired by blog posts from @redblobgames (https://www.redblobgames.com/grids/hexagons/)
+The code and the library itself are highly inspired by blog posts by @redblobgames (https://www.redblobgames.com/grids/hexagons/)
 
 ## Features
 - Pure Java 17+ library
@@ -16,7 +16,6 @@ The code and the library itself are highly inspired by blog posts from @redblobg
 - Supports regular hexagons with flat or pointy orientation 
 - Supports custom object to be tied to hexagon
 - Supports grid creation via simple builder
-- Supports rectangle and hexagonal grids
+- Supports grid with rectangle and hexagonal shape 
 
-## Next milestone - Mercury
-![GitHub milestone](https://img.shields.io/github/milestones/progress-percent/DigitalSmile/hexagon/1)
+## Next milestone - [Mercury](https://github.com/DigitalSmile/hexagon/milestone/1) ![GitHub milestone](https://img.shields.io/github/milestones/progress-percent/DigitalSmile/hexagon/1)
