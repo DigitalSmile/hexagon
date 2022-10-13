@@ -7,6 +7,9 @@ import org.digitalsmile.hexagon.storage.HexagonMetaObjectStorage;
 
 import java.util.stream.IntStream;
 
+/**
+ * Creates Hexagonal shape of the grid.
+ */
 public class HexagonalShapeCreator implements ShapeCreator<HexagonalBounds> {
     @Override
     public <T> void createShape(HexagonalBounds hexagonalBounds, HexagonMetaObjectStorage<T> dataStorage, Orientation orientation) {

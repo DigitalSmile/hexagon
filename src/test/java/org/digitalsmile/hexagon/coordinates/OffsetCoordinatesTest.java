@@ -31,7 +31,7 @@ public class OffsetCoordinatesTest {
 
     @Test
     void testToString() {
-        var offsetCoordinates = new OffsetCoordinates(1,1);
+        var offsetCoordinates = new OffsetCoordinates(1, 1);
         assertEquals("(1, 1)", offsetCoordinates.toString());
     }
 }

@@ -5,6 +5,7 @@ import org.digitalsmile.hexagon.layout.Orientation;
 
 /**
  * Record class to represent offset coordinates of hexagon in a {@link org.digitalsmile.hexagon.Grid} as described <a href="https://www.redblobgames.com/grids/hexagons/#coordinates-offset">here</a>.
+ *
  * @param row - row index of hexagon
  * @param col - column index of hexagon
  */
@@ -12,15 +13,16 @@ public record OffsetCoordinates(int row, int col) {
 
     /**
      * Creates offset coordinates from given hexagon and orientation.
+     *
      * @param orientation - orientation of hexagon
-     * @param hexagon - provided hexagon
+     * @param hexagon     - provided hexagon
      * @return offset coordinates of provided hexagon
      */
     public static OffsetCoordinates fromCube(Orientation orientation, Hexagon hexagon) {
         int col;
         int row;
         int offset;
-        switch (orientation){
+        switch (orientation) {
             case POINTY -> {
                 offset = hexagon.r() % 2 == 0 ? 1 : -1;
                 col = hexagon.q() + (hexagon.r() + offset * (hexagon.r() & 1)) / 2;
@@ -38,7 +40,8 @@ public record OffsetCoordinates(int row, int col) {
 
     /**
      * Creates hexagon from given offset coordinates and orientation.
-     * @param orientation - orientation of hexagon
+     *
+     * @param orientation       - orientation of hexagon
      * @param offsetCoordinates - offset coordinates
      * @return hexagon of provided offset coordinates
      */
@@ -47,7 +50,7 @@ public record OffsetCoordinates(int row, int col) {
         int r;
         int s;
         int offset;
-        switch (orientation){
+        switch (orientation) {
             case POINTY -> {
                 offset = offsetCoordinates.row % 2 == 0 ? 1 : -1;
                 q = offsetCoordinates.col - (offsetCoordinates.row + offset * (offsetCoordinates.row & 1)) / 2;

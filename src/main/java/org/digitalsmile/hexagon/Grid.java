@@ -149,7 +149,7 @@ public class Grid {
         }
 
         public HexagonGridBuilder hexagonShape(HexagonalBounds hexagonalBounds) {
-            this.shape = Shape.HEXAGON;
+            this.shape = Shape.HEXAGONAL;
             this.bounds = hexagonalBounds;
             return this;
         }

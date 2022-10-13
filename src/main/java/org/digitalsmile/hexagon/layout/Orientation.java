@@ -5,12 +5,13 @@ import java.util.stream.IntStream;
 
 /**
  * Class that represents hexagon orientation.
- *       /\       __
- *      | |     /   \
- *      \/      \__/
- *    Pointy    Flat
- *
+ * /\       __
+ * | |     /   \
+ * \/      \__/
+ * Pointy    Flat
+ * <p>
  * All conversion constants are hardcoded and computed on the very start.
+ *
  * @see <a href="https://www.redblobgames.com/grids/hexagons/#hex-to-pixel">Hex to Pixel</a>
  * @see <a href="https://www.redblobgames.com/grids/hexagons/#pixel-to-hex">Pixel to Hex</a>
  */
@@ -48,8 +49,9 @@ public enum Orientation {
 
     /**
      * Converts hexagon q and r cube coordinates to X coordinate in 2D representation.
+     *
      * @param hexagon - provided hexagon
-     * @param side - side size of hexagon
+     * @param side    - side size of hexagon
      * @return X-axis pixel representation of hexagon
      */
     double pixelCoordinateX(Hexagon hexagon, double side) {
@@ -58,8 +60,9 @@ public enum Orientation {
 
     /**
      * Converts hexagon q and r cube coordinates to Y coordinate in 2D representation.
+     *
      * @param hexagon - provided hexagon
-     * @param side - side size of hexagon
+     * @param side    - side size of hexagon
      * @return Y-axis pixel representation of hexagon
      */
     double pixelCoordinateY(Hexagon hexagon, double side) {
@@ -68,6 +71,7 @@ public enum Orientation {
 
     /**
      * Converts X and Y pixel coordinate to q coordinate fo hexagon.
+     *
      * @param point - x and y coordinate
      * @return q coordinate of hexagon in a point
      */
@@ -77,6 +81,7 @@ public enum Orientation {
 
     /**
      * Converts X and Y pixel coordinate to r coordinate fo hexagon.
+     *
      * @param point - x and y coordinate
      * @return r coordinate of hexagon in a point
      */
@@ -86,6 +91,7 @@ public enum Orientation {
 
     /**
      * Gets the sine value of the corner (0 to 5) of hexagon. The value is precomputed.
+     *
      * @param corner - corner value of hexagon (0 to 5)
      * @return sinus value of hexagon corner
      */
@@ -95,6 +101,7 @@ public enum Orientation {
 
     /**
      * Gets the cosine value of the corner (0 to 5) of hexagon. The value is precomputed.
+     *
      * @param corner - corner value of hexagon (0 to 5)
      * @return cosine value of hexagon corner
      */

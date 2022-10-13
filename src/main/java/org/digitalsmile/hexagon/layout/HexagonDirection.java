@@ -5,7 +5,6 @@ import java.util.Arrays;
 /**
  * Provides values for determine direction of hexagon side with relative rotation in degrees.
  * Direction is started by North (upper top) with index 0. Direction follows counterclockwise rule, so do the indexing.
- *
  */
 public enum HexagonDirection {
     NORTH(0, 0f, new Hexagon(0, -1, 1)),
@@ -27,6 +26,7 @@ public enum HexagonDirection {
 
     /**
      * Gets next counterclockwise direction by given direction.
+     *
      * @param hexagonDirection - provided hexagon direction
      * @return next counterclockwise direction
      */
@@ -37,6 +37,7 @@ public enum HexagonDirection {
 
     /**
      * Gets next clockwise direction by given direction.
+     *
      * @param hexagonDirection - provided hexagon direction
      * @return next clockwise direction
      */
@@ -47,6 +48,7 @@ public enum HexagonDirection {
 
     /**
      * Gets direction by given angle in degrees.
+     *
      * @param degree - provided degree, cannot be negative
      * @return hexagon direction that is within range by provided angle or null if angle is negative
      */
@@ -78,6 +80,7 @@ public enum HexagonDirection {
 
     /**
      * Gets relative rotation in degree of current direction.
+     *
      * @return degree of relative rotation
      */
     public float getRotation() {
@@ -86,6 +89,7 @@ public enum HexagonDirection {
 
     /**
      * Gets index of current direction (0-5).
+     *
      * @return index of current direction (0-5)
      */
     public int getIndex() {
@@ -95,6 +99,7 @@ public enum HexagonDirection {
     /**
      * Gets relative hexagon that is next to given direction.
      * Can be used to quick calculation of actual hexagon coordinates followed by direction
+     *
      * @return relative hexagon
      */
     public Hexagon getDeltaHexagon() {

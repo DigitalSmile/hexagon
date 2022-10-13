@@ -13,7 +13,7 @@ class HexagonTest {
 
     @Test
     void testHexagonThrows() {
-        assertThrows(IllegalArgumentException.class, () -> new Hexagon(1,2,3));
+        assertThrows(IllegalArgumentException.class, () -> new Hexagon(1, 2, 3));
     }
 
     @Test
@@ -46,7 +46,7 @@ class HexagonTest {
     @Test
     void testHexagonDirection() {
         var hexagon1 = new Hexagon(0, -1, 1);
-        var hexagon2 = new Hexagon(0,0,0);
+        var hexagon2 = new Hexagon(0, 0, 0);
         assertEquals(HexagonDirection.NORTH, hexagon2.direction(hexagon1));
     }
 
@@ -78,7 +78,7 @@ class HexagonTest {
 
     @Test
     void testHexagonRotateLeft() {
-        var hexagon1 =  new Hexagon(1, -3, 2).rotateLeft();
+        var hexagon1 = new Hexagon(1, -3, 2).rotateLeft();
         var hexagon2 = new Hexagon(-2, -1, 3);
         assertEquals(hexagon1, hexagon2);
     }

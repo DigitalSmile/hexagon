@@ -24,7 +24,8 @@ compileJava {
 test {
     useJUnitPlatform {
         includeTags("HexagonTest", "LayoutTest", "FractionalHexagonTest",
-                "HexagonDirectionTest", "OrientationTest", "DoubledCoordinatesTest", "OffsetCoordinatesTest")
+                "HexagonDirectionTest", "OrientationTest", "DoubledCoordinatesTest", "OffsetCoordinatesTest",
+                "ShapeTest")
     }
     finalizedBy jacocoTestReport
 }

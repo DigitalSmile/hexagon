@@ -7,6 +7,9 @@ import org.digitalsmile.hexagon.storage.HexagonMetaObjectStorage;
 
 import java.util.stream.IntStream;
 
+/**
+ * Creates Rectangle shape of the grid.
+ */
 public class RectangleShapeCreator implements ShapeCreator<RectangleBounds> {
 
     @Override

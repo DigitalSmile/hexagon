@@ -10,6 +10,9 @@ public class HexagonMetaObjectStorage<T> {
     public HexagonMetaObjectStorage(HexagonMetaObjectHook<T> hook) {
         this.hook = hook;
     }
+    public HexagonMetaObjectStorage() {
+        this.hook = null;
+    }
 
     public void hexagonObjectCreated(Hexagon hexagon) {
         if (hook == null) {
@@ -30,5 +33,9 @@ public class HexagonMetaObjectStorage<T> {
 
     public List<T> getHexagonDataObjects() {
         return new ArrayList<>(dataMap.values());
+    }
+
+    public void clearHexagons() {
+        dataMap.clear();
     }
 }

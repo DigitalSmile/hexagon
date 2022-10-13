@@ -10,6 +10,6 @@ class FractionalHexagonTest {
 
     @Test
     void testFractionalHexagonThrows() {
-        assertThrows(IllegalArgumentException.class, () -> new FractionalHexagon(1d,2d,3d));
+        assertThrows(IllegalArgumentException.class, () -> new FractionalHexagon(1d, 2d, 3d));
     }
 }
