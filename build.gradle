@@ -23,7 +23,8 @@ compileJava {
 
 test {
     useJUnitPlatform {
-        includeTags("HexagonTest", "LayoutTest", "FractionalHexagonTest", "HexagonDirectionTest", "OrientationTest")
+        includeTags("HexagonTest", "LayoutTest", "FractionalHexagonTest",
+                "HexagonDirectionTest", "OrientationTest", "DoubledCoordinatesTest", "OffsetCoordinatesTest")
     }
     finalizedBy jacocoTestReport
 }
