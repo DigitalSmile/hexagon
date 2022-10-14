@@ -57,8 +57,8 @@ public class HexagonViewer extends JFrame {
             addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    var mouseX = MouseInfo.getPointerInfo().getLocation().x - DrawingPanel.this.getLocationOnScreen().x - hexagonGrid.getLayout().getOffset().x() - 10;
-                    var mouseY = MouseInfo.getPointerInfo().getLocation().y - DrawingPanel.this.getLocationOnScreen().y - hexagonGrid.getLayout().getOffset().y() - 10;
+                    var mouseX = MouseInfo.getPointerInfo().getLocation().x - DrawingPanel.this.getLocationOnScreen().x - hexagonGrid.getHexagonLayout().getOffset().x() - 10;
+                    var mouseY = MouseInfo.getPointerInfo().getLocation().y - DrawingPanel.this.getLocationOnScreen().y - hexagonGrid.getHexagonLayout().getOffset().y() - 10;
                     getGraphics().drawString(mouseX + " " + mouseY, 10, 10);
                 }
 
@@ -98,7 +98,7 @@ public class HexagonViewer extends JFrame {
         void drawLines(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
             for (Hexagon hexagon : hexagonGrid.getHexagons()) {
-                var points = hexagonGrid.getLayout().getHexagonPoints(hexagon);
+                var points = hexagonGrid.getHexagonLayout().getHexagonPoints(hexagon);
                 for (Point point : points) {
                     var index = points.indexOf(point);
                     if (index + 1 == points.size()) {
@@ -106,7 +106,7 @@ public class HexagonViewer extends JFrame {
                     }
                     g2d.draw(new Line2D.Double(point.x(), point.y(), points.get(index + 1).x(), points.get(index + 1).y()));
                 }
-                g2d.drawString(hexagon.toString(), (float) hexagonGrid.getLayout().getHexagonCenterPoint(hexagon).x(), (float) hexagonGrid.getLayout().getHexagonCenterPoint(hexagon).y());
+                g2d.drawString(hexagon.toString(), (float) hexagonGrid.getHexagonLayout().getHexagonCenterPoint(hexagon).x(), (float) hexagonGrid.getHexagonLayout().getHexagonCenterPoint(hexagon).y());
 
 
 
