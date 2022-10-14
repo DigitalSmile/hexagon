@@ -7,16 +7,16 @@ import org.digitalsmile.hexagon.layout.Orientation;
 /**
  * Record class to represent offset coordinates of hexagon in a {@link HexagonGrid} as described <a href="https://www.redblobgames.com/grids/hexagons/#coordinates-offset">here</a>.
  *
- * @param row - row index of hexagon
- * @param col - column index of hexagon
+ * @param row row index of hexagon
+ * @param col column index of hexagon
  */
 public record OffsetCoordinates(int row, int col) {
 
     /**
      * Creates offset coordinates from given hexagon and orientation.
      *
-     * @param orientation - orientation of hexagon
-     * @param hexagon     - provided hexagon
+     * @param orientation orientation of hexagon
+     * @param hexagon     provided hexagon
      * @return offset coordinates of provided hexagon
      */
     public static OffsetCoordinates fromCube(Orientation orientation, Hexagon hexagon) {
@@ -42,8 +42,8 @@ public record OffsetCoordinates(int row, int col) {
     /**
      * Creates hexagon from given offset coordinates and orientation.
      *
-     * @param orientation       - orientation of hexagon
-     * @param offsetCoordinates - offset coordinates
+     * @param orientation       orientation of hexagon
+     * @param offsetCoordinates offset coordinates
      * @return hexagon of provided offset coordinates
      */
     public static Hexagon toCube(Orientation orientation, OffsetCoordinates offsetCoordinates) {

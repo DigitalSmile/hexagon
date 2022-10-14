@@ -27,7 +27,7 @@ public enum HexagonDirection {
     /**
      * Gets next counterclockwise direction by given direction.
      *
-     * @param hexagonDirection - provided hexagon direction
+     * @param hexagonDirection provided hexagon direction
      * @return next counterclockwise direction
      */
     public static HexagonDirection nextCounterClockWiseDirection(HexagonDirection hexagonDirection) {
@@ -38,7 +38,7 @@ public enum HexagonDirection {
     /**
      * Gets next clockwise direction by given direction.
      *
-     * @param hexagonDirection - provided hexagon direction
+     * @param hexagonDirection provided hexagon direction
      * @return next clockwise direction
      */
     public static HexagonDirection nextClockWiseDirection(HexagonDirection hexagonDirection) {
@@ -49,7 +49,7 @@ public enum HexagonDirection {
     /**
      * Gets direction by given angle in degrees.
      *
-     * @param degree - provided degree, cannot be negative
+     * @param degree provided degree, cannot be negative
      * @return hexagon direction that is within range by provided angle or null if angle is negative
      */
     public static HexagonDirection getDirection(float degree) {

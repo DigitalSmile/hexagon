@@ -6,15 +6,15 @@ import org.digitalsmile.hexagon.layout.Hexagon;
 /**
  * Record class to represent doubled coordinates of hexagon in a {@link HexagonGrid} as described <a href="https://www.redblobgames.com/grids/hexagons/#coordinates-doubled">here</a>.
  *
- * @param row - row index of hexagon
- * @param col - column index of hexagon
+ * @param row row index of hexagon
+ * @param col column index of hexagon
  */
 public record DoubledCoordinates(int row, int col) {
 
     /**
      * Creates doubled coordinates by row based doubling.
      *
-     * @param hexagon - provided hexagon
+     * @param hexagon provided hexagon
      * @return doubled coordinate of hexagon
      */
     public static DoubledCoordinates rowDoubledFromCube(Hexagon hexagon) {
@@ -38,7 +38,7 @@ public record DoubledCoordinates(int row, int col) {
     /**
      * Creates doubled coordinates by column based doubling.
      *
-     * @param hexagon - provided hexagon
+     * @param hexagon provided hexagon
      * @return doubled coordinate of hexagon
      */
     public static DoubledCoordinates colDoubledFromCube(Hexagon hexagon) {

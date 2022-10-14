@@ -22,10 +22,10 @@ public enum Shape {
     /**
      * Creates shape by giving bounds and orientation.
      *
-     * @param bounds      - bounds of created shape
-     * @param dataStorage - storage for hexagons and companion objects
-     * @param orientation - orientation of hexagon
-     * @param <T>         - type of companion objects in data storage
+     * @param bounds      bounds of created shape
+     * @param dataStorage storage for hexagons and companion objects
+     * @param orientation orientation of hexagon
+     * @param <T>         type of companion objects in data storage
      */
     public <T> void createShape(Bounds bounds, HexagonMetaObjectStorage<T> dataStorage, Orientation
             orientation) {

@@ -98,7 +98,7 @@ public class HexagonGrid {
 
     /**
      * Gets meta objects by provided hexagon.
-     * @param hexagon - provided hexagon
+     * @param hexagon provided hexagon
      * @return meta object
      * @param <T> type of meta object
      */

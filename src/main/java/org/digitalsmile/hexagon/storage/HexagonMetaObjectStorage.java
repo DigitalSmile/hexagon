@@ -16,7 +16,7 @@ public class HexagonMetaObjectStorage<T> {
     /**
      * Creates data storage with meta object hook.
      *
-     * @param hook - hook to create meta object
+     * @param hook hook to create meta object
      */
     public HexagonMetaObjectStorage(HexagonMetaObjectHook<T> hook) {
         this.hook = hook;
@@ -33,7 +33,7 @@ public class HexagonMetaObjectStorage<T> {
      * Adds hexagon to data storage.
      * Optionally, if hook is not null, calls fpr meta object creation.
      *
-     * @param hexagon - hexagon to be added
+     * @param hexagon hexagon to be added
      */
     public void addHexagon(Hexagon hexagon) {
         if (hook == null) {
@@ -56,7 +56,7 @@ public class HexagonMetaObjectStorage<T> {
     /**
      * Gets meta object bound to hexagon.
      *
-     * @param hexagon - hexagon provided
+     * @param hexagon hexagon provided
      * @return meta object bound to hexagon
      */
     public T getHexagonDataObject(Hexagon hexagon) {

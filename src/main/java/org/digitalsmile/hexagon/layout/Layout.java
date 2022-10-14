@@ -33,7 +33,7 @@ public class Layout {
     /**
      * Gets the center of hexagon with X and Y coordinates.
      *
-     * @param hexagon - provided hexagon to calculate
+     * @param hexagon provided hexagon to calculate
      * @return X and Y representation of center point of hexagon
      */
     public Point getHexagonCenterPoint(Hexagon hexagon) {
@@ -45,7 +45,7 @@ public class Layout {
     /**
      * Gets the hexagon by provided X and Y coordinates.
      *
-     * @param point - X and Y coordinates to get hexagon
+     * @param point X and Y coordinates to get hexagon
      * @return hexagon underneath X and Y coordinates
      */
     public Hexagon getBoundingHexagon(Point point) {
@@ -63,7 +63,7 @@ public class Layout {
      * Gets X and Y coordinates of each corner of provided hexagon with layout offset.
      * Can be used to render hexagons.
      *
-     * @param hexagon - provided hexagon
+     * @param hexagon provided hexagon
      * @return list of X and Y corner coordinates of provided hexagon
      */
     public List<Point> getHexagonPoints(Hexagon hexagon) {
@@ -118,6 +118,4 @@ public class Layout {
     public Point getOffset() {
         return offset;
     }
-
-
 }

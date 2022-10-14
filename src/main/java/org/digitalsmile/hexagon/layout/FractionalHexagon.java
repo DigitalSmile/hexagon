@@ -5,9 +5,9 @@ import org.digitalsmile.hexagon.HexagonGrid;
 /**
  * Utility hexagon class for interpolating and rounding physical coordinates (e.g. pixels) to exact hexagon on the {@link HexagonGrid}.
  *
- * @param q - fuzzy q coordinates of hexagon
- * @param r - fuzzy r coordinates of hexagon
- * @param s - fuzzy s coordinates of hexagon
+ * @param q fuzzy q coordinates of hexagon
+ * @param r fuzzy r coordinates of hexagon
+ * @param s fuzzy s coordinates of hexagon
  */
 record FractionalHexagon(double q, double r, double s) {
 
@@ -44,8 +44,8 @@ record FractionalHexagon(double q, double r, double s) {
     /**
      * Interpolation function for coordinate determination.
      *
-     * @param fractionalHexagon - provided "near" hexagon
-     * @param step              - step of interpolation
+     * @param fractionalHexagon provided "near" hexagon
+     * @param step              step of interpolation
      * @return new FractionalHexagon with more precise coordinates
      */
     public FractionalHexagon interpolate(FractionalHexagon fractionalHexagon, double step) {

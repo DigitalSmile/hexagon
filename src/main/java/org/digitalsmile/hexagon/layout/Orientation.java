@@ -50,8 +50,8 @@ public enum Orientation {
     /**
      * Converts hexagon q and r cube coordinates to X coordinate in 2D representation.
      *
-     * @param hexagon - provided hexagon
-     * @param side    - side size of hexagon
+     * @param hexagon provided hexagon
+     * @param side    side size of hexagon
      * @return X-axis pixel representation of hexagon
      */
     double pixelCoordinateX(Hexagon hexagon, double side) {
@@ -61,8 +61,8 @@ public enum Orientation {
     /**
      * Converts hexagon q and r cube coordinates to Y coordinate in 2D representation.
      *
-     * @param hexagon - provided hexagon
-     * @param side    - side size of hexagon
+     * @param hexagon provided hexagon
+     * @param side    side size of hexagon
      * @return Y-axis pixel representation of hexagon
      */
     double pixelCoordinateY(Hexagon hexagon, double side) {
@@ -72,7 +72,7 @@ public enum Orientation {
     /**
      * Converts X and Y pixel coordinate to q coordinate fo hexagon.
      *
-     * @param point - x and y coordinate
+     * @param point x and y coordinate
      * @return q coordinate of hexagon in a point
      */
     double hexagonCoordinateQ(Point point) {
@@ -82,7 +82,7 @@ public enum Orientation {
     /**
      * Converts X and Y pixel coordinate to r coordinate fo hexagon.
      *
-     * @param point - x and y coordinate
+     * @param point x and y coordinate
      * @return r coordinate of hexagon in a point
      */
     double hexagonCoordinateR(Point point) {
@@ -92,7 +92,7 @@ public enum Orientation {
     /**
      * Gets the sine value of the corner (0 to 5) of hexagon. The value is precomputed.
      *
-     * @param corner - corner value of hexagon (0 to 5)
+     * @param corner corner value of hexagon (0 to 5)
      * @return sinus value of hexagon corner
      */
     double getSinCorner(int corner) {
@@ -102,7 +102,7 @@ public enum Orientation {
     /**
      * Gets the cosine value of the corner (0 to 5) of hexagon. The value is precomputed.
      *
-     * @param corner - corner value of hexagon (0 to 5)
+     * @param corner corner value of hexagon (0 to 5)
      * @return cosine value of hexagon corner
      */
     double getCosCorner(int corner) {

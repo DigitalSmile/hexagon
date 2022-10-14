@@ -10,9 +10,9 @@ import java.util.stream.IntStream;
  * Also, there are operations for finding direction, getting neighbour and calculating distance.
  * NOTE: since it is a record class, equals of existing and new instance with same q, r and s coordinates will <b>always return true</b>.
  *
- * @param q - q coordinate of hexagon
- * @param r - q coordinate of hexagon
- * @param s - q coordinate of hexagon
+ * @param q q coordinate of hexagon
+ * @param r q coordinate of hexagon
+ * @param s q coordinate of hexagon
  */
 public record Hexagon(int q, int r, int s) {
 
@@ -35,7 +35,7 @@ public record Hexagon(int q, int r, int s) {
     /**
      * Subtracts current hexagon from hexagon provided.
      *
-     * @param hexagon - provided hexagon to subtract
+     * @param hexagon provided hexagon to subtract
      * @return the subtraction of two hexagons
      */
     public Hexagon subtract(Hexagon hexagon) {
@@ -45,7 +45,7 @@ public record Hexagon(int q, int r, int s) {
     /**
      * Scales current hexagon by the amount provided.
      *
-     * @param unitScale - amount to scale
+     * @param unitScale amount to scale
      * @return scaled hexagon
      */
     public Hexagon scale(int unitScale) {
@@ -73,7 +73,7 @@ public record Hexagon(int q, int r, int s) {
     /**
      * Gets hexagon direction relative to current hexagon.
      *
-     * @param hexagon - hexagon to be checked
+     * @param hexagon hexagon to be checked
      * @return hexagon direction
      */
     public HexagonDirection direction(Hexagon hexagon) {
@@ -85,7 +85,7 @@ public record Hexagon(int q, int r, int s) {
     /**
      * Gets neighbour hexagon by direction provided.
      *
-     * @param direction - hexagon direction to check
+     * @param direction hexagon direction to check
      * @return hexagon at provided direction
      */
     public Hexagon neighbor(HexagonDirection direction) {
@@ -100,7 +100,7 @@ public record Hexagon(int q, int r, int s) {
     /**
      * Gets diagonal neighbour hexagon by direction provided.
      *
-     * @param direction - hexagon direction to check
+     * @param direction hexagon direction to check
      * @return hexagon at provided direction
      */
     public Hexagon diagonalNeighbor(int direction) {
@@ -110,7 +110,7 @@ public record Hexagon(int q, int r, int s) {
     /**
      * Calculates distance from current hexagon to hexagon provided.
      *
-     * @param hexagon - provided hexagon to calculate distance
+     * @param hexagon provided hexagon to calculate distance
      * @return number of hexagons between current and provided hexagons (distance)
      */
     public int distance(Hexagon hexagon) {
@@ -127,8 +127,8 @@ public record Hexagon(int q, int r, int s) {
     /**
      * Creates list of hexagons, that form a line between provided hexagons.
      *
-     * @param hexagon1 - hexagon start from
-     * @param hexagon2 - hexagon end to
+     * @param hexagon1 hexagon start from
+     * @param hexagon2 hexagon end to
      * @return list of hexagons, that form a line
      */
     public static List<Hexagon> hexagonLinePath(Hexagon hexagon1, Hexagon hexagon2) {
