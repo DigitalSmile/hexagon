@@ -17,6 +17,49 @@ The code and the library itself are highly inspired by blog posts by @redblobgam
 - Supports regular hexagons with flat or pointy orientation 
 - Supports custom object to be tied to hexagon
 - Supports grid creation via simple builder
-- Supports grid with rectangle and hexagonal shape 
+- Supports grid with rectangle and hexagonal shape
+
+## Usage
+Add dependency to your project.
+
+Gradle:
+
+```
+    allprojects {
+        repositories {
+            ...
+            maven { url 'https://jitpack.io' }
+        }
+    }
+
+    dependencies {
+        implementation 'com.github.DigitalSmile:hexagon:0.1.2'
+    }
+```
+Maven:
+```
+	<repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+        ...
+        <dependency>
+            <groupId>com.github.DigitalSmile</groupId>
+            <artifactId>hexagon</artifactId>
+            <version>0.1.2</version>
+        </dependency>
+```
+Use a `HexagonGridBuilder` to create a grid or use `Hexagon` and `Operations` classes directly:
+```
+        var hexagonGrid = new HexagonGrid.HexagonGridBuilder()
+                .hexagonShape(new HexagonalBounds(5))
+                .orientation(Orientation.FLAT)
+                .hexagonWidth(150)
+                .build();
+        hexagonGrid.generateHexagons();
+        var hexagonList = hexagonGrid.getHexagons();
+```
 
 ## Next milestone - [Mercury](https://github.com/DigitalSmile/hexagon/milestone/1) ![GitHub milestone](https://img.shields.io/github/milestones/progress-percent/DigitalSmile/hexagon/1)
