@@ -8,6 +8,9 @@ plugins {
 group 'org.digitalsmile'
 version '0.1'
 
+sourceCompatibility = 17 // java 8
+targetCompatibility = 17
+
 repositories {
     mavenCentral()
 }
@@ -16,10 +19,6 @@ dependencies {
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
-}
-
-compileJava {
-    options.release = 17
 }
 
 publishing {
