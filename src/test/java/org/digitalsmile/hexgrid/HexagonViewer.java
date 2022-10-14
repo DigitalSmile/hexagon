@@ -52,8 +52,6 @@ public class HexagonViewer extends JFrame {
                     .build();
 
             hexagonGrid.generateHexagons();
-            var a = hexagonGrid.<Hexagon>getHexagonDataObject(new Hexagon(0,0,0));
-            System.out.println(a);
             addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
