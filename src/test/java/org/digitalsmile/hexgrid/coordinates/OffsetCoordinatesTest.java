@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Tag("OffsetCoordinatesTest")
-public class OffsetCoordinatesTest {
+class OffsetCoordinatesTest {
     @Test
     void testFromCube() {
         var hexagon = new Hexagon(2, -2, 0);

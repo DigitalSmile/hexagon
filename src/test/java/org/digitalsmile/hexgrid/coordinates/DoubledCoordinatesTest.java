@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Tag("DoubledCoordinatesTest")
-public class DoubledCoordinatesTest {
+class DoubledCoordinatesTest {
 
     @Test
     void testRowDoubledFromCube() {

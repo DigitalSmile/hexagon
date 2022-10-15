@@ -10,6 +10,9 @@ import java.util.stream.IntStream;
  * Class that provides range operations for hexagon.
  */
 public class RangeOperations {
+
+    private RangeOperations(){}
+
     /**
      * Gets the list of hexagon in a specific range starting from provided center.
      * Set useParallelStream flag to true to force computation in parallel.

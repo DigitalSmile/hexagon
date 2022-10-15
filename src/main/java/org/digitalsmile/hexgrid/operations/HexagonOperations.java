@@ -9,6 +9,8 @@ public class HexagonOperations {
     private static final double EPSILON_1 = 1e-06;
     private static final double EPSILON_2 = 2e-06;
 
+    private HexagonOperations(){}
+
     /**
      * Creates list of hexagons, that form a line between provided hexagons.
      *
@@ -37,7 +39,7 @@ public class HexagonOperations {
      * @return hexagon behind "fuzzy" coordinates
      */
     public static Hexagon fuzzyToHexagon(double q, double r, double s) {
-        return new FractionalHexagon(q, r, -q - r).roundToHexagon();
+        return new FractionalHexagon(q, r, s).roundToHexagon();
     }
 
     /**

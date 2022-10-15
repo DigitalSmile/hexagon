@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Tag("StorageTest")
-public class StorageTest {
+class StorageTest {
 
     @Test
     void testAddAndGetStorage() {

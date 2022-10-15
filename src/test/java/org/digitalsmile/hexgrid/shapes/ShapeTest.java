@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Tag("ShapeTest")
-public class ShapeTest {
+class ShapeTest {
 
     @Test
     void testCreateShapeHexagonal() {

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
 @Tag("RangeOperationsTest")
-public class RangeOperationsTest {
+class RangeOperationsTest {
 
     @Test
     void testGetRange() {
