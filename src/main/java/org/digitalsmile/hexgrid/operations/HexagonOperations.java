@@ -27,30 +27,75 @@ public class HexagonOperations {
                 .toList();
     }
 
+    /**
+     * Creates hexagon by providing "fuzzy" q, r and s coordinates.
+     * Method will try to approximate double values and return the real hexagon behind the coordinates provided.
+     *
+     * @param q fuzzy q value
+     * @param r fuzzy r value
+     * @param s fuzzy s value
+     * @return hexagon behind "fuzzy" coordinates
+     */
     public static Hexagon fuzzyToHexagon(double q, double r, double s) {
         return new FractionalHexagon(q, r, -q - r).roundToHexagon();
     }
 
+    /**
+     * Creates hexagon as a 90 degrees reflection by Q axis.
+     *
+     * @param hexagon provided hexagon o be reflected
+     * @return reflected hexagon
+     */
     public static Hexagon reflectQ90(Hexagon hexagon) {
         return hexagon.reflectQ().negate();
     }
 
+    /**
+     * Creates hexagon as a 45 degrees reflection by Q axis.
+     *
+     * @param hexagon provided hexagon o be reflected
+     * @return reflected hexagon
+     */
     public static Hexagon reflectQ45(Hexagon hexagon) {
         return hexagon.negate();
     }
 
+    /**
+     * Creates hexagon as a 90 degrees reflection by R axis.
+     *
+     * @param hexagon provided hexagon o be reflected
+     * @return reflected hexagon
+     */
     public static Hexagon reflectR90(Hexagon hexagon) {
         return hexagon.reflectR().negate();
     }
 
+    /**
+     * Creates hexagon as a 45 degrees reflection by R axis.
+     *
+     * @param hexagon provided hexagon o be reflected
+     * @return reflected hexagon
+     */
     public static Hexagon reflectR45(Hexagon hexagon) {
         return hexagon.negate();
     }
 
+    /**
+     * Creates hexagon as a 90 degrees reflection by S axis.
+     *
+     * @param hexagon provided hexagon o be reflected
+     * @return reflected hexagon
+     */
     public static Hexagon reflectS90(Hexagon hexagon) {
         return hexagon.reflectS().negate();
     }
 
+    /**
+     * Creates hexagon as a 45 degrees reflection by S axis.
+     *
+     * @param hexagon provided hexagon o be reflected
+     * @return reflected hexagon
+     */
     public static Hexagon reflectS45(Hexagon hexagon) {
         return hexagon.negate();
     }
