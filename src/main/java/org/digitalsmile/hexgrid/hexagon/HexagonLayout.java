@@ -1,5 +1,7 @@
 package org.digitalsmile.hexgrid.hexagon;
 
+import org.digitalsmile.hexgrid.operations.HexagonOperations;
+
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -52,7 +54,7 @@ public class HexagonLayout {
         var adjustedPoint = new Point((point.x() - offset.x()) / side, (point.y() - offset.y()) / side);
         var q = orientation.hexagonCoordinateQ(adjustedPoint);
         var r = orientation.hexagonCoordinateR(adjustedPoint);
-        return new FractionalHexagon(q, r, -q - r).roundToHexagon();
+        return HexagonOperations.fuzzyToHexagon(q, r, -q - r);
     }
 
     private Point getHexagonCornerPoint(int corner) {
@@ -66,7 +68,7 @@ public class HexagonLayout {
      * @param hexagon provided hexagon
      * @return list of X and Y corner coordinates of provided hexagon
      */
-    public List<Point> getHexagonPoints(Hexagon hexagon) {
+    public List<Point> getHexagonCornerPoints(Hexagon hexagon) {
         var center = getHexagonCenterPoint(hexagon);
         return IntStream.range(0, 6).mapToObj(value -> {
             var cornerPoint = getHexagonCornerPoint(value);

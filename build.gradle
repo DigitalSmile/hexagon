@@ -38,7 +38,7 @@ test {
     useJUnitPlatform {
         includeTags("HexagonTest", "LayoutTest", "FractionalHexagonTest",
                 "HexagonDirectionTest", "OrientationTest", "DoubledCoordinatesTest", "OffsetCoordinatesTest",
-                "ShapeTest", "StorageTest", "HexagonGridTest")
+                "ShapeTest", "StorageTest", "HexagonGridTest", "HexagonOperationsTest")
     }
     finalizedBy jacocoTestReport
 }

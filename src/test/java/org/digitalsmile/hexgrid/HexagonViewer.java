@@ -96,7 +96,7 @@ public class HexagonViewer extends JFrame {
         void drawLines(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
             for (Hexagon hexagon : hexagonGrid.getHexagons()) {
-                var points = hexagonGrid.getHexagonLayout().getHexagonPoints(hexagon);
+                var points = hexagonGrid.getHexagonLayout().getHexagonCornerPoints(hexagon);
                 for (Point point : points) {
                     var index = points.indexOf(point);
                     if (index + 1 == points.size()) {

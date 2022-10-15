@@ -2,7 +2,6 @@ package org.digitalsmile.hexgrid.hexagon;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.IntStream;
 
 /**
  * Main record class that represents hexagon in cube coordinates. o learn more about cube coordinates, visit <a href="https://www.redblobgames.com/grids/hexagons/#coordinates-cube">@redblobgames</a>
@@ -70,6 +69,22 @@ public record Hexagon(int q, int r, int s) {
         return new Hexagon(-r, -s, -q);
     }
 
+    public Hexagon reflectQ() {
+        return new Hexagon(q, s, r);
+    }
+
+    public Hexagon reflectR() {
+        return new Hexagon(s, r, q);
+    }
+
+    public Hexagon reflectS() {
+        return new Hexagon(r, q, s);
+    }
+
+    public Hexagon negate() {
+        return new Hexagon(-q, -r, -s);
+    }
+
     /**
      * Gets hexagon direction relative to current hexagon.
      *
@@ -119,27 +134,6 @@ public record Hexagon(int q, int r, int s) {
 
     private int length() {
         return (Math.abs(q) + Math.abs(r) + Math.abs(s)) / 2;
-    }
-
-    private static final double EPSILON_1 = 1e-06;
-    private static final double EPSILON_2 = 2e-06;
-
-    /**
-     * Creates list of hexagons, that form a line between provided hexagons.
-     *
-     * @param hexagon1 hexagon start from
-     * @param hexagon2 hexagon end to
-     * @return list of hexagons, that form a line
-     */
-    public static List<Hexagon> hexagonLinePath(Hexagon hexagon1, Hexagon hexagon2) {
-        var distance = hexagon1.distance(hexagon2);
-        var hexagon1Nudge = new FractionalHexagon(hexagon1.q() + EPSILON_1, hexagon1.r() + EPSILON_1, hexagon1.s() - EPSILON_2);
-        var hexagon2Nudge = new FractionalHexagon(hexagon2.q() + EPSILON_1, hexagon2.r() + EPSILON_1, hexagon2.s() - EPSILON_2);
-
-        var step = 1.0 / Math.max(distance, 1);
-        return IntStream.rangeClosed(0, distance)
-                .mapToObj(value -> hexagon1Nudge.interpolate(hexagon2Nudge, step * value).roundToHexagon())
-                .toList();
     }
 
     @Override

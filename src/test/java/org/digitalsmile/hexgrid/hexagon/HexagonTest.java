@@ -3,10 +3,8 @@ package org.digitalsmile.hexgrid.hexagon;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @Tag("HexagonTest")
 class HexagonTest {
@@ -84,16 +82,27 @@ class HexagonTest {
     }
 
     @Test
-    void testHexagonLinePath() {
-        List<Hexagon> testList = new ArrayList<>() {{
-            add(new Hexagon(0, 0, 0));
-            add(new Hexagon(0, -1, 1));
-            add(new Hexagon(0, -2, 2));
-            add(new Hexagon(1, -3, 2));
-            add(new Hexagon(1, -4, 3));
-            add(new Hexagon(1, -5, 4));
-        }};
-        var resultHexagons = Hexagon.hexagonLinePath(new Hexagon(0, 0, 0), new Hexagon(1, -5, 4));
-        assertIterableEquals(testList, resultHexagons);
+    void testReflectQ() {
+        var hexagon = new Hexagon(-2, -1, 3);
+        assertEquals(new Hexagon(-2, 3, -1), hexagon.reflectQ());
     }
+
+    @Test
+    void testReflectR() {
+        var hexagon = new Hexagon(-2, -1, 3);
+        assertEquals(new Hexagon(3, -1, -2), hexagon.reflectR());
+    }
+
+    @Test
+    void testReflectS() {
+        var hexagon = new Hexagon(-2, -1, 3);
+        assertEquals(new Hexagon(-1, -2, 3), hexagon.reflectS());
+    }
+
+    @Test
+    void testNegate() {
+        var hexagon = new Hexagon(1, -3, 2);
+        assertEquals(new Hexagon(-1, 3, -2), hexagon.negate());
+    }
+
 }
