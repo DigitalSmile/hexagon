@@ -1,5 +1,7 @@
-package org.digitalsmile.hexgrid.hexagon;
+package org.digitalsmile.hexgrid.layout;
 
+import org.digitalsmile.hexgrid.hexagon.Hexagon;
+import org.digitalsmile.hexgrid.hexagon.Point;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 

@@ -1,9 +1,10 @@
 package org.digitalsmile.hexgrid;
 
+import org.digitalsmile.hexgrid.coordinates.OffsetCoordinates;
 import org.digitalsmile.hexgrid.hexagon.Hexagon;
-import org.digitalsmile.hexgrid.hexagon.Orientation;
 import org.digitalsmile.hexgrid.hexagon.Point;
-import org.digitalsmile.hexgrid.shapes.rectangle.RectangleBounds;
+import org.digitalsmile.hexgrid.layout.Orientation;
+import org.digitalsmile.hexgrid.shapes.hexagonal.HexagonalShape;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -37,21 +38,29 @@ public class HexagonViewer extends JFrame {
 
     public class DrawingPanel extends JPanel {
         
-        private final HexagonGrid hexagonGrid;
+        private final HexagonGrid<?> hexagonGrid;
 
         public DrawingPanel() {
             this.setPreferredSize(new Dimension(1200, 800));
 
-            this.hexagonGrid = new HexagonGrid.HexagonGridBuilder()
+            this.hexagonGrid = new HexagonGrid.HexagonGridBuilder<>()
                     .side(75)
-                    .orientation(Orientation.POINTY)
-                    .rectangleShape(new RectangleBounds(2,2))
-                    .hexagonMetaObjectHook(hexagon -> "123")
+                    //.shape(new RectangleShape(5, 7), Orientation.FLAT)
+                    .shape(new HexagonalShape(3), Orientation.POINTY)
+                    .hexagonMetaObjectHook(hexagon -> OffsetCoordinates.fromCube(Orientation.POINTY, hexagon))
                     .offsetX(535)
                     .offsetY(321)
                     .build();
 
             hexagonGrid.generateHexagons();
+            for (Hexagon hexagon : hexagonGrid.getHexagons()) {
+                System.out.print(OffsetCoordinates.fromCube(Orientation.POINTY, hexagon));
+            }
+            System.out.println();
+            var hex = OffsetCoordinates.toCube(Orientation.POINTY, new OffsetCoordinates(4,1));
+            System.out.println(hexagonGrid.getHexagonDataObject(hex).toString());
+//            System.out.println(VM.current().details());
+//            System.out.println(ClassLayout.parseInstance(hexagonGrid.getHexagons()).toPrintable());
             addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -105,6 +114,7 @@ public class HexagonViewer extends JFrame {
                     g2d.draw(new Line2D.Double(point.x(), point.y(), points.get(index + 1).x(), points.get(index + 1).y()));
                 }
                 g2d.drawString(hexagon.toString(), (float) hexagonGrid.getHexagonLayout().getHexagonCenterPoint(hexagon).x(), (float) hexagonGrid.getHexagonLayout().getHexagonCenterPoint(hexagon).y());
+                //g2d.drawString(OffsetCoordinates.fromCube(Orientation.POINTY, hexagon).toString(), (float) hexagonGrid.getHexagonLayout().getHexagonCenterPoint(hexagon).x(), (float) hexagonGrid.getHexagonLayout().getHexagonCenterPoint(hexagon).y());
 
 
 

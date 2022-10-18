@@ -7,7 +7,7 @@ import org.digitalsmile.hexgrid.hexagon.Hexagon;
  *
  * @param <T> type of meta object to be created
  */
-public interface HexagonMetaObjectHook<T> {
+public interface HexagonCreationHook<T> {
     /**
      * Creates a meta object paired to hexagon.
      *

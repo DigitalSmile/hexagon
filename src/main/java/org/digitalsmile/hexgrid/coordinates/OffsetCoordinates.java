@@ -2,7 +2,7 @@ package org.digitalsmile.hexgrid.coordinates;
 
 import org.digitalsmile.hexgrid.HexagonGrid;
 import org.digitalsmile.hexgrid.hexagon.Hexagon;
-import org.digitalsmile.hexgrid.hexagon.Orientation;
+import org.digitalsmile.hexgrid.layout.Orientation;
 
 /**
  * Record class to represent offset coordinates of hexagon in a {@link HexagonGrid} as described <a href="https://www.redblobgames.com/grids/hexagons/#coordinates-offset">here</a>.

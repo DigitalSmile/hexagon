@@ -2,7 +2,6 @@ package com.digitalsmile.hexgrid.operations;
 
 import org.digitalsmile.hexgrid.hexagon.Hexagon;
 import org.digitalsmile.hexgrid.operations.RangeOperations;
-import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.infra.Blackhole;
@@ -15,7 +14,7 @@ public class RangeOperationsTest {
         public int range = 100;
     }
 
-    @Benchmark
+    //@Benchmark
     public void testGetRangeNoParallelStream(Input i, Blackhole blackhole) {
         var list = RangeOperations.getRange(i.hexagon, i.range);
         blackhole.consume(list);

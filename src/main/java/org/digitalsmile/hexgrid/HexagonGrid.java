@@ -1,15 +1,13 @@
 package org.digitalsmile.hexgrid;
 
 import org.digitalsmile.hexgrid.hexagon.Hexagon;
-import org.digitalsmile.hexgrid.hexagon.HexagonLayout;
-import org.digitalsmile.hexgrid.hexagon.Orientation;
+import org.digitalsmile.hexgrid.layout.GridLayout;
+import org.digitalsmile.hexgrid.layout.HexagonLayout;
+import org.digitalsmile.hexgrid.layout.Orientation;
 import org.digitalsmile.hexgrid.hexagon.Point;
-import org.digitalsmile.hexgrid.shapes.Bounds;
 import org.digitalsmile.hexgrid.shapes.Shape;
-import org.digitalsmile.hexgrid.shapes.hexagonal.HexagonalBounds;
-import org.digitalsmile.hexgrid.shapes.rectangle.RectangleBounds;
-import org.digitalsmile.hexgrid.storage.HexagonMetaObjectHook;
-import org.digitalsmile.hexgrid.storage.HexagonMetaObjectStorage;
+import org.digitalsmile.hexgrid.storage.HexagonCreationHook;
+import org.digitalsmile.hexgrid.storage.HexagonStorage;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,32 +17,30 @@ import java.util.stream.Stream;
 /**
  * Main class that represents grid of hexagons with
  */
-public class HexagonGrid {
-    private final Shape shape;
-    private final Bounds bounds;
-    private final HexagonMetaObjectStorage<?> dataStorage;
-    private final HexagonLayout hexagonLayout;
+public class HexagonGrid<S extends Shape> {
+    private final GridLayout<S> gridLayout;
+    private final HexagonStorage<?> dataStorage;
 
-    private HexagonGrid(HexagonGridBuilder builder) {
-        this.bounds = builder.bounds;
-        this.shape = builder.shape;
-        this.dataStorage = new HexagonMetaObjectStorage<>(builder.objectCreationHook);
-
+    private HexagonGrid(HexagonGridBuilder<S> builder) {
         var layoutProps = calculateLayoutProps(builder);
-        this.hexagonLayout = new HexagonLayout(builder.orientation,
+        var hexagonLayout = new HexagonLayout(builder.orientation,
                 layoutProps.hexagonWidth(), layoutProps.hexagonHeight(), layoutProps.side(),
                 new Point(builder.offsetX, builder.offsetY));
+        this.gridLayout = new GridLayout<>(builder.shape, hexagonLayout);
+        this.dataStorage = new HexagonStorage<>(gridLayout.getShape().getGridSize(),
+                gridLayout.getIndexProcessor(), builder.objectCreationHook);
     }
 
     /**
      * Generates hexagon grid with props provided earlier.
      */
     public void generateHexagons() {
-        shape.createShape(bounds, dataStorage, hexagonLayout.getOrientation());
+        gridLayout.createShape(dataStorage);
     }
 
     /**
      * Gets list of hexagons. The list is unmodifiable.
+     *
      * @return unmodifiable list of hexagons
      */
     public List<Hexagon> getHexagons() {
@@ -53,9 +49,10 @@ public class HexagonGrid {
 
     /**
      * Gets meta objects by provided hexagon.
+     *
      * @param hexagon provided hexagon
+     * @param <T>     type of meta object
      * @return meta object
-     * @param <T> type of meta object
      */
     @SuppressWarnings("unchecked")
     public <T> T getHexagonDataObject(Hexagon hexagon) {
@@ -64,24 +61,24 @@ public class HexagonGrid {
 
     /**
      * Gets layout of grid creates.
+     *
      * @return grid layout object
      */
     public HexagonLayout getHexagonLayout() {
-        return hexagonLayout;
+        return gridLayout.getHexagonLayout();
     }
 
-//    public double getWidth() {
+    //    public double getWidth() {
 //        return layout.getHexagonWidth() * 3 / 4 * cols + layout.getHexagonWidth();
 //    }
 //
 //    public double getHeight() {
 //        return layout.getHexagonHeight() * (rows + 1);
 //    }
-
     private record LayoutProps(double hexagonWidth, double hexagonHeight, double side) {
     }
 
-    private LayoutProps calculateLayoutProps(HexagonGridBuilder builder) {
+    private LayoutProps calculateLayoutProps(HexagonGridBuilder<S> builder) {
         double hexagonWidth;
         double hexagonHeight;
         double side;
@@ -124,48 +121,36 @@ public class HexagonGrid {
     /**
      * Builder for creating hexagon grid.
      */
-    public static class HexagonGridBuilder {
+    public static class HexagonGridBuilder<S extends Shape> {
         private Orientation orientation;
-        private Shape shape;
-        private Bounds bounds;
+        private S shape;
         private double offsetX;
         private double offsetY;
         private double hexagonWidth;
         private double hexagonHeight;
         private double side;
 
-        private HexagonMetaObjectHook<?> objectCreationHook;
+        private HexagonCreationHook<?> objectCreationHook;
 
         private static final String SIZE_ERROR = "You should specify width, height or side of hexagon, but not combination!";
 
-        public HexagonGridBuilder orientation(Orientation orientation) {
+        public  HexagonGridBuilder<S> shape(S shape, Orientation orientation) {
+            this.shape = shape;
             this.orientation = orientation;
             return this;
         }
 
-        public HexagonGridBuilder rectangleShape(RectangleBounds rectangleBounds) {
-            this.shape = Shape.RECTANGLE;
-            this.bounds = rectangleBounds;
-            return this;
-        }
-
-        public HexagonGridBuilder hexagonShape(HexagonalBounds hexagonalBounds) {
-            this.shape = Shape.HEXAGONAL;
-            this.bounds = hexagonalBounds;
-            return this;
-        }
-
-        public HexagonGridBuilder offsetX(double offsetX) {
+        public HexagonGridBuilder<S> offsetX(double offsetX) {
             this.offsetX = offsetX;
             return this;
         }
 
-        public HexagonGridBuilder offsetY(double offsetY) {
+        public HexagonGridBuilder<S> offsetY(double offsetY) {
             this.offsetY = offsetY;
             return this;
         }
 
-        public HexagonGridBuilder hexagonWidth(double hexagonWidth) {
+        public HexagonGridBuilder<S> hexagonWidth(double hexagonWidth) {
             if (this.hexagonHeight != 0 || this.side != 0) {
                 throw new IllegalArgumentException(SIZE_ERROR);
             }
@@ -173,7 +158,7 @@ public class HexagonGrid {
             return this;
         }
 
-        public HexagonGridBuilder hexagonHeight(double hexagonHeight) {
+        public HexagonGridBuilder<S> hexagonHeight(double hexagonHeight) {
             if (this.hexagonWidth != 0 || this.side != 0) {
                 throw new IllegalArgumentException(SIZE_ERROR);
             }
@@ -181,7 +166,7 @@ public class HexagonGrid {
             return this;
         }
 
-        public HexagonGridBuilder side(double side) {
+        public HexagonGridBuilder<S> side(double side) {
             if (this.hexagonWidth != 0 || this.hexagonHeight != 0) {
                 throw new IllegalArgumentException(SIZE_ERROR);
             }
@@ -189,23 +174,23 @@ public class HexagonGrid {
             return this;
         }
 
-        public HexagonGridBuilder hexagonMetaObjectHook(HexagonMetaObjectHook<?> objectCreationHook) {
+        public HexagonGridBuilder<S> hexagonMetaObjectHook(HexagonCreationHook<?> objectCreationHook) {
             this.objectCreationHook = objectCreationHook;
             return this;
         }
 
-        public HexagonGrid build() {
+        public HexagonGrid<S> build() {
             if (Objects.isNull(orientation)) {
                 throw new IllegalArgumentException("You have to define Orientation for hexagon in order to create a grid!");
             }
-            if (Objects.isNull(shape) || Objects.isNull(bounds)) {
+            if (Objects.isNull(shape)) {
                 throw new IllegalArgumentException("You have to define Shape and Bounds for a grid!");
             }
             var emptyProps = Stream.of(hexagonWidth, hexagonHeight, side).filter(value -> value == 0).count();
             if (emptyProps == 3) {
                 throw new IllegalArgumentException("You have to define at least one of third props - hexagonWidth/hexagonHeight/side - to create a grid!");
             }
-            return new HexagonGrid(this);
+            return new HexagonGrid<>(this);
         }
     }
 }
