@@ -21,7 +21,7 @@ public class HexagonStorageTest {
         grid = new HexagonGrid.HexagonGridBuilder<>()
                 .hexagonWidth(150)
                 .shape(new RectangleShape(1000, 1000), Orientation.FLAT)
-                .hexagonMetaObjectHook(Hexagon::toString)
+                .hexagonDataObjectHook(Hexagon::toString)
                 .build();
         grid.generateHexagons();
         var randomX = new Random().nextInt(1000);

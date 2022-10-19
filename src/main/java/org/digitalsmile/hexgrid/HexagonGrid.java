@@ -174,7 +174,7 @@ public class HexagonGrid<S extends Shape> {
             return this;
         }
 
-        public HexagonGridBuilder<S> hexagonMetaObjectHook(HexagonCreationHook<?> objectCreationHook) {
+        public HexagonGridBuilder<S> hexagonDataObjectHook(HexagonCreationHook<?> objectCreationHook) {
             this.objectCreationHook = objectCreationHook;
             return this;
         }

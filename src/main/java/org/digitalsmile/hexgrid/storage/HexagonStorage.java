@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * Main hexagon storage with optional meta objects.
- * Adding and getting new hexagon / meta object are O(1).
+ * Add, get, contains of hexagon / meta object are O(1).
  *
  * @param <T> type of meta objects
  */
@@ -34,7 +34,7 @@ public class HexagonStorage<T> {
 
     /**
      * Adds hexagon to data storage.
-     * Optionally, if hook is not null, calls fpr meta object creation.
+     * Optionally, if hook is not null, calls for meta object creation.
      *
      * @param hexagon hexagon to be added
      */
@@ -44,6 +44,11 @@ public class HexagonStorage<T> {
         if (hook != null) {
             metaObjectsList.set(index, hook.onHexagonCreate(hexagon));
         }
+    }
+
+    public boolean containsHexagon(Hexagon hexagon) {
+        var index = indexProcessor.getIndex(hexagon);
+        return index >= 0 && index < hexagonList.size();
     }
 
     /**

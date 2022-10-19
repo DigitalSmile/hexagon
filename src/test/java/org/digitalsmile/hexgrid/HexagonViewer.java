@@ -47,7 +47,7 @@ public class HexagonViewer extends JFrame {
                     .side(75)
                     //.shape(new RectangleShape(5, 7), Orientation.FLAT)
                     .shape(new HexagonalShape(3), Orientation.POINTY)
-                    .hexagonMetaObjectHook(hexagon -> OffsetCoordinates.fromCube(Orientation.POINTY, hexagon))
+                    .hexagonDataObjectHook(hexagon -> OffsetCoordinates.fromCube(Orientation.POINTY, hexagon))
                     .offsetX(535)
                     .offsetY(321)
                     .build();

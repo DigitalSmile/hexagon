@@ -20,7 +20,7 @@ class HexagonGridTest {
                 .shape(new HexagonalShape(3), Orientation.FLAT)
                 .offsetX(10)
                 .offsetY(10)
-                .hexagonMetaObjectHook(Hexagon::toString)
+                .hexagonDataObjectHook(Hexagon::toString)
                 .build();
         hexagonGrid.generateHexagons();
         assertEquals(37, hexagonGrid.getHexagons().size());
@@ -32,7 +32,7 @@ class HexagonGridTest {
                 .shape(new HexagonalShape(3), Orientation.FLAT)
                 .offsetX(10)
                 .offsetY(10)
-                .hexagonMetaObjectHook(Hexagon::toString)
+                .hexagonDataObjectHook(Hexagon::toString)
                 .build();
         hexagonGrid.generateHexagons();
         assertEquals(37, hexagonGrid.getHexagons().size());
@@ -44,7 +44,7 @@ class HexagonGridTest {
                 .shape(new HexagonalShape(3), Orientation.FLAT)
                 .offsetX(10)
                 .offsetY(10)
-                .hexagonMetaObjectHook(Hexagon::toString)
+                .hexagonDataObjectHook(Hexagon::toString)
                 .build();
         hexagonGrid.generateHexagons();
         assertEquals(37, hexagonGrid.getHexagons().size());
@@ -59,7 +59,7 @@ class HexagonGridTest {
                 .shape(new HexagonalShape(3), Orientation.POINTY)
                 .offsetX(10)
                 .offsetY(10)
-                .hexagonMetaObjectHook(Hexagon::toString)
+                .hexagonDataObjectHook(Hexagon::toString)
                 .build();
         hexagonGrid.generateHexagons();
         assertEquals(37, hexagonGrid.getHexagons().size());
@@ -71,7 +71,7 @@ class HexagonGridTest {
                 .shape(new HexagonalShape(3), Orientation.POINTY)
                 .offsetX(10)
                 .offsetY(10)
-                .hexagonMetaObjectHook(Hexagon::toString)
+                .hexagonDataObjectHook(Hexagon::toString)
                 .build();
         hexagonGrid.generateHexagons();
         assertEquals(37, hexagonGrid.getHexagons().size());
@@ -83,7 +83,7 @@ class HexagonGridTest {
                 .shape(new HexagonalShape(3), Orientation.POINTY)
                 .offsetX(10)
                 .offsetY(10)
-                .hexagonMetaObjectHook(Hexagon::toString)
+                .hexagonDataObjectHook(Hexagon::toString)
                 .build();
         hexagonGrid.generateHexagons();
         assertEquals(37, hexagonGrid.getHexagons().size());
