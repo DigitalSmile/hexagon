@@ -25,7 +25,7 @@ class HexagonGridTest {
         hexagonGrid.generateHexagons();
         assertEquals(37, hexagonGrid.getHexagons().size());
         assertEquals("(0, 0, 0)", hexagonGrid.getHexagonDataObject(new Hexagon(0,0,0)));
-        assertEquals(150, hexagonGrid.getHexagonLayout().getHexagonWidth());
+        assertEquals(150, hexagonGrid.getGridLayout().getHexagonLayout().getHexagonWidth());
 
         hexagonGrid = new HexagonGrid.HexagonGridBuilder<>()
                 .hexagonHeight(150)
@@ -37,7 +37,7 @@ class HexagonGridTest {
         hexagonGrid.generateHexagons();
         assertEquals(37, hexagonGrid.getHexagons().size());
         assertEquals("(0, 0, 0)", hexagonGrid.getHexagonDataObject(new Hexagon(0,0,0)));
-        assertEquals(150, hexagonGrid.getHexagonLayout().getHexagonHeight());
+        assertEquals(150, hexagonGrid.getGridLayout().getHexagonLayout().getHexagonHeight());
 
         hexagonGrid = new HexagonGrid.HexagonGridBuilder<>()
                 .side(75)
@@ -49,7 +49,7 @@ class HexagonGridTest {
         hexagonGrid.generateHexagons();
         assertEquals(37, hexagonGrid.getHexagons().size());
         assertEquals("(0, 0, 0)", hexagonGrid.getHexagonDataObject(new Hexagon(0,0,0)));
-        assertEquals(75, hexagonGrid.getHexagonLayout().getSide());
+        assertEquals(75, hexagonGrid.getGridLayout().getHexagonLayout().getSide());
     }
 
     @Test
@@ -64,7 +64,7 @@ class HexagonGridTest {
         hexagonGrid.generateHexagons();
         assertEquals(37, hexagonGrid.getHexagons().size());
         assertEquals("(0, 0, 0)", hexagonGrid.getHexagonDataObject(new Hexagon(0,0,0)));
-        assertEquals(150, hexagonGrid.getHexagonLayout().getHexagonWidth());
+        assertEquals(150, hexagonGrid.getGridLayout().getHexagonLayout().getHexagonWidth());
 
         hexagonGrid = new HexagonGrid.HexagonGridBuilder<>()
                 .hexagonHeight(150)
@@ -76,7 +76,7 @@ class HexagonGridTest {
         hexagonGrid.generateHexagons();
         assertEquals(37, hexagonGrid.getHexagons().size());
         assertEquals("(0, 0, 0)", hexagonGrid.getHexagonDataObject(new Hexagon(0,0,0)));
-        assertEquals(150, hexagonGrid.getHexagonLayout().getHexagonHeight());
+        assertEquals(150, hexagonGrid.getGridLayout().getHexagonLayout().getHexagonHeight());
 
         hexagonGrid = new HexagonGrid.HexagonGridBuilder<>()
                 .side(75)
@@ -88,7 +88,7 @@ class HexagonGridTest {
         hexagonGrid.generateHexagons();
         assertEquals(37, hexagonGrid.getHexagons().size());
         assertEquals("(0, 0, 0)", hexagonGrid.getHexagonDataObject(new Hexagon(0,0,0)));
-        assertEquals(75, hexagonGrid.getHexagonLayout().getSide());
+        assertEquals(75, hexagonGrid.getGridLayout().getHexagonLayout().getSide());
     }
 
     @Test

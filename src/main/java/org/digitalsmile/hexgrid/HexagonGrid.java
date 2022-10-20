@@ -64,8 +64,8 @@ public class HexagonGrid<S extends Shape> {
      *
      * @return grid layout object
      */
-    public HexagonLayout getHexagonLayout() {
-        return gridLayout.getHexagonLayout();
+    public GridLayout<S> getGridLayout() {
+        return gridLayout;
     }
 
     //    public double getWidth() {
