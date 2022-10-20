@@ -53,7 +53,9 @@ public class HexagonLayout {
      * @return hexagon underneath X and Y coordinates
      */
     public Hexagon getBoundingHexagon(Point point) {
-        var adjustedPoint = new Point((point.x() - offset.x()) / side, (point.y() - offset.y()) / side);
+        var adjustedPoint = new Point(
+                (point.x() - hexagonWidth / 2d - offset.x()) / side,
+                (point.y() - hexagonHeight / 2d - offset.y()) / side);
         var q = orientation.hexagonCoordinateQ(adjustedPoint);
         var r = orientation.hexagonCoordinateR(adjustedPoint);
         return HexagonOperations.fuzzyToHexagon(q, r, -q - r);
