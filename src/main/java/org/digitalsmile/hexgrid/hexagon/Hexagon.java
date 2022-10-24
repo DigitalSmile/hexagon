@@ -69,18 +69,38 @@ public record Hexagon(int q, int r, int s) {
         return new Hexagon(-r, -s, -q);
     }
 
+    /**
+     * Reflect the hexagon by Q-axis.
+     *
+     * @return reflected hexagon
+     */
     public Hexagon reflectQ() {
         return new Hexagon(q, s, r);
     }
 
+    /**
+     * Reflect the hexagon by R-axis.
+     *
+     * @return reflected hexagon
+     */
     public Hexagon reflectR() {
         return new Hexagon(s, r, q);
     }
 
+    /**
+     * Reflect the hexagon by S-axis.
+     *
+     * @return reflected hexagon
+     */
     public Hexagon reflectS() {
         return new Hexagon(r, q, s);
     }
 
+    /**
+     * Negates the hexagon.
+     *
+     * @return negated hexagon
+     */
     public Hexagon negate() {
         return new Hexagon(-q, -r, -s);
     }

@@ -31,6 +31,11 @@ public record RectangleShape(int top, int bottom, int left, int right) implement
         this(0, rows - 1, 0, cols - 1);
     }
 
+    /**
+     * Gets the number of rows.
+     *
+     * @return number of rows
+     */
     public int getRows() {
         int gridSizeY;
         if (top < 0 || bottom < 0) {
@@ -41,6 +46,11 @@ public record RectangleShape(int top, int bottom, int left, int right) implement
         return gridSizeY;
     }
 
+    /**
+     * Gets the number of columns.
+     *
+     * @return number of columns
+     */
     public int getCols() {
         int gridSizeX;
         if (left < 0 || right < 0) {

@@ -36,4 +36,10 @@ class DoubledCoordinatesTest {
         var doubledCoordinate = new DoubledCoordinates(-1, 3);
         assertEquals(hexagon, doubledCoordinate.colDoubledToCube());
     }
+
+    @Test
+    void testToString() {
+        var doubledCoordinate = new DoubledCoordinates(2, 2);
+        assertEquals("(2, 2)", doubledCoordinate.toString());
+    }
 }

@@ -8,4 +8,5 @@ module hexgrids {
     exports org.digitalsmile.hexgrid.coordinates;
     exports org.digitalsmile.hexgrid.layout;
     exports org.digitalsmile.hexgrid.shapes;
+    exports org.digitalsmile.hexgrid.operations.pole;
 }

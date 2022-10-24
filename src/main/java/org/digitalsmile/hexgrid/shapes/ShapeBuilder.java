@@ -16,6 +16,12 @@ public interface ShapeBuilder<S extends Shape> {
      */
     <T> void createShape(GridLayout<S> gridLayout, HexagonStorage<T> dataStorage);
 
+    /**
+     * Gets index processor associated with specific grid shape.
+     *
+     * @param gridLayout specific grid layout
+     * @return index processor
+     */
     IndexProcessor getIndexProcessor(GridLayout<S> gridLayout);
 
 }

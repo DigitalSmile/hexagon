@@ -5,11 +5,15 @@ import org.digitalsmile.hexgrid.hexagon.Hexagon;
 import java.util.List;
 import java.util.stream.IntStream;
 
+/**
+ * Class for basic operations with hexagons.
+ */
 public class HexagonOperations {
     private static final double EPSILON_1 = 1e-06;
     private static final double EPSILON_2 = 2e-06;
 
-    private HexagonOperations(){}
+    private HexagonOperations() {
+    }
 
     /**
      * Creates list of hexagons, that form a line between provided hexagons.

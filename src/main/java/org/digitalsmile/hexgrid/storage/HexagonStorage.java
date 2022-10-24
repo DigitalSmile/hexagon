@@ -6,6 +6,7 @@ import org.digitalsmile.hexgrid.shapes.IndexProcessor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Main hexagon storage with optional meta objects.
@@ -13,7 +14,7 @@ import java.util.List;
  *
  * @param <T> type of meta objects
  */
-public class HexagonStorage<T> {
+public class HexagonStorage<T> implements Storage<T> {
     private final HexagonCreationHook<T> hook;
     private final IndexProcessor indexProcessor;
 
@@ -21,9 +22,11 @@ public class HexagonStorage<T> {
     private final List<T> metaObjectsList;
 
     /**
-     * Creates data storage with meta object hook.
+     * Creates data storage.
      *
-     * @param hook hook to create meta object
+     * @param hexagonGridSize size of the grid
+     * @param indexProcessor  index processor to calculate index for specific grid shape
+     * @param hook            hook to create meta object
      */
     public HexagonStorage(int hexagonGridSize, IndexProcessor indexProcessor, HexagonCreationHook<T> hook) {
         this.hook = hook;
@@ -40,44 +43,13 @@ public class HexagonStorage<T> {
      */
     public void addHexagon(Hexagon hexagon) {
         var index = indexProcessor.getIndex(hexagon);
+        if (index == -1) {
+            throw new IllegalArgumentException("Cannot add hexagon with coordinates " + hexagon + ". It is out of grid bounds.");
+        }
         hexagonList.set(index, hexagon);
         if (hook != null) {
             metaObjectsList.set(index, hook.onHexagonCreate(hexagon));
         }
-    }
-
-    public boolean containsHexagon(Hexagon hexagon) {
-        var index = indexProcessor.getIndex(hexagon);
-        return index >= 0 && index < hexagonList.size();
-    }
-
-    /**
-     * Gets list of hexagons.
-     *
-     * @return list of hexagons from storage.
-     */
-    public List<Hexagon> getHexagons() {
-        return hexagonList;
-    }
-
-    /**
-     * Gets meta object bound to hexagon.
-     *
-     * @param hexagon hexagon provided
-     * @return meta object bound to hexagon
-     */
-    public T getHexagonDataObject(Hexagon hexagon) {
-        return metaObjectsList.get(indexProcessor.getIndex(hexagon));
-    }
-
-
-    /**
-     * Gets all meta objects as list.
-     *
-     * @return list of all meta objects
-     */
-    public List<T> getHexagonDataObjects() {
-        return metaObjectsList;
     }
 
     /**
@@ -86,5 +58,46 @@ public class HexagonStorage<T> {
     public void clear() {
         hexagonList.clear();
         metaObjectsList.clear();
+    }
+
+    @Override
+    public boolean containsHexagon(Hexagon hexagon) {
+        var index = indexProcessor.getIndex(hexagon);
+        return index >= 0 && index < hexagonList.size() && hexagon.equals(hexagonList.get(index));
+    }
+
+    @Override
+    public List<Hexagon> getHexagons() {
+        return Collections.unmodifiableList(hexagonList);
+    }
+
+    @Override
+    public List<Hexagon> getHexagons(List<Hexagon> boundingPolygon, boolean useParallelStream) {
+        var stream = boundingPolygon.stream();
+        if (useParallelStream) {
+            stream = stream.parallel();
+        }
+        return stream
+                .flatMap(hexagon -> Stream.ofNullable(containsHexagon(hexagon) ? hexagon : null))
+                .toList();
+    }
+
+    @Override
+    public List<Hexagon> getHexagons(List<Hexagon> boundingPolygon) {
+        return getHexagons(boundingPolygon, false);
+    }
+
+    @Override
+    public T getHexagonDataObject(Hexagon hexagon) {
+        var index = indexProcessor.getIndex(hexagon);
+        if (index == -1) {
+            return null;
+        }
+        return metaObjectsList.get(index);
+    }
+
+    @Override
+    public List<T> getHexagonDataObjects() {
+        return metaObjectsList;
     }
 }

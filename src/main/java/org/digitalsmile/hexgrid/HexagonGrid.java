@@ -1,21 +1,19 @@
 package org.digitalsmile.hexgrid;
 
-import org.digitalsmile.hexgrid.hexagon.Hexagon;
+import org.digitalsmile.hexgrid.hexagon.Point;
 import org.digitalsmile.hexgrid.layout.GridLayout;
 import org.digitalsmile.hexgrid.layout.HexagonLayout;
 import org.digitalsmile.hexgrid.layout.Orientation;
-import org.digitalsmile.hexgrid.hexagon.Point;
 import org.digitalsmile.hexgrid.shapes.Shape;
 import org.digitalsmile.hexgrid.storage.HexagonCreationHook;
 import org.digitalsmile.hexgrid.storage.HexagonStorage;
+import org.digitalsmile.hexgrid.storage.Storage;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
 /**
- * Main class that represents grid of hexagons with
+ * Main class that represents grid of hexagons.
  */
 public class HexagonGrid<S extends Shape> {
     private final GridLayout<S> gridLayout;
@@ -39,27 +37,6 @@ public class HexagonGrid<S extends Shape> {
     }
 
     /**
-     * Gets list of hexagons. The list is unmodifiable.
-     *
-     * @return unmodifiable list of hexagons
-     */
-    public List<Hexagon> getHexagons() {
-        return Collections.unmodifiableList(dataStorage.getHexagons());
-    }
-
-    /**
-     * Gets meta objects by provided hexagon.
-     *
-     * @param hexagon provided hexagon
-     * @param <T>     type of meta object
-     * @return meta object
-     */
-    @SuppressWarnings("unchecked")
-    public <T> T getHexagonDataObject(Hexagon hexagon) {
-        return (T) dataStorage.getHexagonDataObject(hexagon);
-    }
-
-    /**
      * Gets layout of grid creates.
      *
      * @return grid layout object
@@ -68,13 +45,10 @@ public class HexagonGrid<S extends Shape> {
         return gridLayout;
     }
 
-    //    public double getWidth() {
-//        return layout.getHexagonWidth() * 3 / 4 * cols + layout.getHexagonWidth();
-//    }
-//
-//    public double getHeight() {
-//        return layout.getHexagonHeight() * (rows + 1);
-//    }
+    public Storage<?> getStorage() {
+        return dataStorage;
+    }
+
     private record LayoutProps(double hexagonWidth, double hexagonHeight, double side) {
     }
 
@@ -134,7 +108,7 @@ public class HexagonGrid<S extends Shape> {
 
         private static final String SIZE_ERROR = "You should specify width, height or side of hexagon, but not combination!";
 
-        public  HexagonGridBuilder<S> shape(S shape, Orientation orientation) {
+        public HexagonGridBuilder<S> shape(S shape, Orientation orientation) {
             this.shape = shape;
             this.orientation = orientation;
             return this;

@@ -2,6 +2,7 @@ package org.digitalsmile.hexgrid.viewer;
 
 import org.digitalsmile.hexgrid.HexagonGrid;
 import org.digitalsmile.hexgrid.coordinates.OffsetCoordinates;
+import org.digitalsmile.hexgrid.hexagon.Point;
 import org.digitalsmile.hexgrid.layout.Orientation;
 import org.digitalsmile.hexgrid.shapes.Shape;
 import org.digitalsmile.hexgrid.shapes.hexagonal.HexagonalShape;
@@ -9,10 +10,12 @@ import org.digitalsmile.hexgrid.shapes.hexagonal.HexagonalShape;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.List;
 
 public class HexagonViewer extends JFrame {
 
-    private final JPanel mainPanel = new JPanel();
     private final DrawingGridPanel gridPanel;
     private final JLabel hexagonPropsLabel;
 
@@ -39,6 +42,7 @@ public class HexagonViewer extends JFrame {
         gridPanel.setBackground(Color.gray);
         outerPanel.add(gridPanel);
 
+        JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         mainPanel.add(Box.createRigidArea(new Dimension(0, 5)));
@@ -57,6 +61,11 @@ public class HexagonViewer extends JFrame {
         gridPanel.repaint();
     }
 
+    public void toggleBoundingPolygon(List<Point> boundingPolygon, boolean value) {
+        gridPanel.toggleBoundingPolygon(boundingPolygon, value);
+        gridPanel.repaint();
+    }
+
     HexagonGrid<?> initGrid(Shape shape, Orientation orientation, double hexagonWidth, double hexagonHeight, double side, double offsetX, double offsetY) {
         var hexagonGridBuilder = new HexagonGrid.HexagonGridBuilder<>();
         if (hexagonWidth != 0) {
@@ -66,6 +75,7 @@ public class HexagonViewer extends JFrame {
         } else if (side != 0) {
             hexagonGridBuilder = hexagonGridBuilder.side(side);
         }
+        var startTime = Instant.now();
         var hexagonGrid = hexagonGridBuilder.shape(shape, orientation)
                 .hexagonDataObjectHook(hexagon -> OffsetCoordinates.fromCube(orientation, hexagon))
                 .offsetX(offsetX)
@@ -73,12 +83,13 @@ public class HexagonViewer extends JFrame {
                 .build();
 
         hexagonGrid.generateHexagons();
+        var elapsed = Duration.between(startTime, Instant.now());
         var gridLayout = hexagonGrid.getGridLayout();
         hexagonPropsLabel.setText(
                 "Hexagon: width " + floor(gridLayout.getHexagonLayout().getHexagonWidth())
                         + "px, height " + floor(gridLayout.getHexagonLayout().getHexagonHeight())
                         + "px, side " + floor(gridLayout.getHexagonLayout().getSide()) + "px. Total count: "
-                        + gridLayout.getShape().getGridSize());
+                        + gridLayout.getShape().getGridSize() + ". Grid created in " + elapsed.toMillis() + "ms");
 
         gridPanel.setGrid(hexagonGrid);
         gridPanel.repaint();
@@ -96,13 +107,10 @@ public class HexagonViewer extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                var viewer = new HexagonViewer();
-                viewer.setVisible(true);
-                viewer.setExtendedState(viewer.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-            }
+        SwingUtilities.invokeLater(() -> {
+            var viewer = new HexagonViewer();
+            viewer.setVisible(true);
+            viewer.setExtendedState(viewer.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         });
     }
 

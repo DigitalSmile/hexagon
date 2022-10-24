@@ -7,8 +7,9 @@ import org.digitalsmile.hexgrid.shapes.rectangle.RectangleShape;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @Tag("StorageTest")
 class StorageTest {
@@ -20,21 +21,38 @@ class StorageTest {
         dataStorage.addHexagon(new Hexagon(1, -1, 0));
         dataStorage.addHexagon(new Hexagon(1, 1, -2));
 
+        var list = List.of(
+                new Hexagon(0, 2, -2),
+                new Hexagon(1, 1, -2),
+                new Hexagon(2, 1, -3),
+                new Hexagon(3, 0, -3),
+                new Hexagon(3, 1, -4),
+                new Hexagon(3, 2, -5),
+                new Hexagon(2, 2, -4),
+                new Hexagon(0, 3, -3)
+        );
+
+        HexagonStorage<Object> finalDataStorage = dataStorage;
+        assertThrows(IllegalArgumentException.class, () ->  finalDataStorage.addHexagon(new Hexagon(10, 20, -30)));
         assertEquals(4, dataStorage.getHexagons().size());
-        assertTrue(dataStorage.getHexagons().contains(new Hexagon(1, -1, 0)));
-        assertTrue(dataStorage.getHexagons().contains(new Hexagon(1, 1, -2)));
+        assertTrue(dataStorage.containsHexagon(new Hexagon(1, -1, 0)));
+        assertTrue(dataStorage.containsHexagon(new Hexagon(1, 1, -2)));
+        assertFalse(dataStorage.containsHexagon(new Hexagon(10, 20, -30)));
+        assertEquals(List.of(new Hexagon(1,1,-2)), dataStorage.getHexagons(list));
+        assertEquals(List.of(new Hexagon(1,1,-2)), dataStorage.getHexagons(list, true));
 
         dataStorage = new HexagonStorage<>(4, indexProcessor, Hexagon::toString);
         dataStorage.addHexagon(new Hexagon(1, -1, 0));
         dataStorage.addHexagon(new Hexagon(1, 1, -2));
 
         assertEquals(4, dataStorage.getHexagons().size());
-        assertTrue(dataStorage.getHexagons().contains(new Hexagon(1, -1, 0)));
-        assertTrue(dataStorage.getHexagons().contains(new Hexagon(1, 1, -2)));
+        assertTrue(dataStorage.containsHexagon(new Hexagon(1, -1, 0)));
+        assertTrue(dataStorage.containsHexagon(new Hexagon(1, 1, -2)));
 
         assertEquals(4, dataStorage.getHexagonDataObjects().size());
         assertEquals("(1, -1, 0)", dataStorage.getHexagonDataObject(new Hexagon(1, -1, 0)));
         assertEquals("(1, 1, -2)", dataStorage.getHexagonDataObject(new Hexagon(1, 1, -2)));
+        assertNull(dataStorage.getHexagonDataObject(new Hexagon(10, 20, -30)));
     }
 
     @Test

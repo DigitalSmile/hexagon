@@ -33,7 +33,7 @@ public class HexagonStorageTest {
     @Benchmark
     @OutputTimeUnit(TimeUnit.MICROSECONDS)
     public void testStorageGetMetaObjectByIndex(Blackhole blackhole) {
-        var object = grid.getHexagonDataObject(hexagonToFind);
+        var object = grid.getStorage().getHexagonDataObject(hexagonToFind);
         blackhole.consume(object);
     }
 

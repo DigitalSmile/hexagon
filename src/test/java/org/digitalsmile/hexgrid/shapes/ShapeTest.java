@@ -1,5 +1,6 @@
 package org.digitalsmile.hexgrid.shapes;
 
+import org.digitalsmile.hexgrid.hexagon.Hexagon;
 import org.digitalsmile.hexgrid.hexagon.Point;
 import org.digitalsmile.hexgrid.layout.GridLayout;
 import org.digitalsmile.hexgrid.layout.HexagonLayout;
@@ -26,14 +27,22 @@ class ShapeTest {
         var dataStorage = new HexagonStorage<>(hexagonalShape.getGridSize(), indexProcessor, null);
         var gridLayout = new GridLayout<>(hexagonalShape,
                 new HexagonLayout(Orientation.POINTY, 150, 0 ,0, new Point(0,0)));
-        new HexagonalShapeBuilder().createShape(gridLayout, dataStorage);
+        var shapeBuilder = new HexagonalShapeBuilder();
+        shapeBuilder.createShape(gridLayout, dataStorage);
         assertEquals(37, dataStorage.getHexagons().size());
+        assertEquals(0, shapeBuilder.getIndexProcessor(gridLayout).getIndex(new Hexagon(0,0,0)));
+        assertEquals(35, shapeBuilder.getIndexProcessor(gridLayout).getIndex(new Hexagon(3,2,-5)));
+
         dataStorage.clear();
+
         dataStorage = new HexagonStorage<>(hexagonalShape.getGridSize(), indexProcessor, null);
         gridLayout = new GridLayout<>(hexagonalShape,
                 new HexagonLayout(Orientation.FLAT, 150, 0 ,0, new Point(0,0)));
-        new HexagonalShapeBuilder().createShape(gridLayout, dataStorage);
+        shapeBuilder = new HexagonalShapeBuilder();
+        shapeBuilder.createShape(gridLayout, dataStorage);
         assertEquals(37, dataStorage.getHexagons().size());
+        assertEquals(0, shapeBuilder.getIndexProcessor(gridLayout).getIndex(new Hexagon(0,0,0)));
+        assertEquals(35, shapeBuilder.getIndexProcessor(gridLayout).getIndex(new Hexagon(3,2,-5)));
     }
 
     @Test
@@ -43,15 +52,25 @@ class ShapeTest {
         var dataStorage = new HexagonStorage<>(rectangleBounds.getGridSize(), indexProcessor, null);
         var gridLayout = new GridLayout<>(rectangleBounds,
                 new HexagonLayout(Orientation.POINTY, 150, 0 ,0, new Point(0,0)));
-        new RectangleShapeBuilder().createShape(gridLayout, dataStorage);
+        var shapeBuilder = new RectangleShapeBuilder();
+        shapeBuilder.createShape(gridLayout, dataStorage);
         assertEquals(9, dataStorage.getHexagons().size());
+        assertEquals(0, shapeBuilder.getIndexProcessor(gridLayout).getIndex(new Hexagon(0,0,0)));
+        assertEquals(8, shapeBuilder.getIndexProcessor(gridLayout).getIndex(new Hexagon(1,2,-3)));
+        assertEquals(-1, shapeBuilder.getIndexProcessor(gridLayout).getIndex(new Hexagon(10,20,-30)));
+
         dataStorage.clear();
+
         indexProcessor = new RectangleIndexProcessor(rectangleBounds, Orientation.FLAT);
         dataStorage = new HexagonStorage<>(rectangleBounds.getGridSize(), indexProcessor, null);
         gridLayout = new GridLayout<>(rectangleBounds,
                 new HexagonLayout(Orientation.FLAT, 150, 0 ,0, new Point(0,0)));
-        new RectangleShapeBuilder().createShape(gridLayout, dataStorage);
+        shapeBuilder = new RectangleShapeBuilder();
+        shapeBuilder.createShape(gridLayout, dataStorage);
         assertEquals(9, dataStorage.getHexagons().size());
+        assertEquals(0, shapeBuilder.getIndexProcessor(gridLayout).getIndex(new Hexagon(0,0,0)));
+        assertEquals(5, shapeBuilder.getIndexProcessor(gridLayout).getIndex(new Hexagon(1,2,-3)));
+        assertEquals(-1, shapeBuilder.getIndexProcessor(gridLayout).getIndex(new Hexagon(10,20,-30)));
         dataStorage.clear();
 
         //TODO: Get storage with irregular shape
