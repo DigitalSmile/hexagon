@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
 /**
  * Class to detect the center of any polygon. See link below for explanations.
  *
- * @link <a href="https://github.com/FreshLlamanade/polylabel-java">poly-label</a>
+ * @see <a href="https://github.com/FreshLlamanade/polylabel-java">poly-label</a>
  */
 public class PoleDetection {
 
