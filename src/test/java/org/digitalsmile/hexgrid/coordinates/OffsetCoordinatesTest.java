@@ -1,14 +1,14 @@
 package org.digitalsmile.hexgrid.coordinates;
 
 import org.digitalsmile.hexgrid.hexagon.Hexagon;
-import org.digitalsmile.hexgrid.hexagon.Orientation;
+import org.digitalsmile.hexgrid.layout.Orientation;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Tag("OffsetCoordinatesTest")
-public class OffsetCoordinatesTest {
+class OffsetCoordinatesTest {
     @Test
     void testFromCube() {
         var hexagon = new Hexagon(2, -2, 0);

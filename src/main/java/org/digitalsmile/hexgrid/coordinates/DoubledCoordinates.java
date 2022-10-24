@@ -58,4 +58,9 @@ public record DoubledCoordinates(int row, int col) {
         var s = -q - r;
         return new Hexagon(q, r, s);
     }
+
+    @Override
+    public String toString() {
+        return "(" + row + ", " + col + ")";
+    }
 }

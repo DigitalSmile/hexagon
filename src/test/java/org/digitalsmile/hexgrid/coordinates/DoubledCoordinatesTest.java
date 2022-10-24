@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Tag("DoubledCoordinatesTest")
-public class DoubledCoordinatesTest {
+class DoubledCoordinatesTest {
 
     @Test
     void testRowDoubledFromCube() {
@@ -35,5 +35,11 @@ public class DoubledCoordinatesTest {
         var hexagon = new Hexagon(2, -1, -1);
         var doubledCoordinate = new DoubledCoordinates(-1, 3);
         assertEquals(hexagon, doubledCoordinate.colDoubledToCube());
+    }
+
+    @Test
+    void testToString() {
+        var doubledCoordinate = new DoubledCoordinates(2, 2);
+        assertEquals("(2, 2)", doubledCoordinate.toString());
     }
 }

@@ -9,7 +9,9 @@
 
 Small and pure Java library to deal with hexagons math and operations with zero dependencies. The library provides an abstract level of hexagon manipulation and is render engine agnostic, so it can be used with any type of visual libraries (AWT, JavaFX, libGDX, etc.)
 
-The code and the library itself are highly inspired by blog posts by @redblobgames (https://www.redblobgames.com/grids/hexagons/)
+Documentation can be found in [wiki](https://github.com/DigitalSmile/hexagon/wiki).
+
+The code and the library itself are highly inspired by blog posts by @redblobgames (https://www.redblobgames.com/grids/hexagons/).
 
 ## Features
 - Pure Java 17+ library
@@ -20,46 +22,46 @@ The code and the library itself are highly inspired by blog posts by @redblobgam
 - Supports grid with rectangle and hexagonal shape
 
 ## Usage
-Add dependency to your project.
+Add dependency to your project. Latest version can be found at the jitpack badge.
 
 Gradle:
 
 ```
-    allprojects {
-        repositories {
-            ...
-            maven { url 'https://jitpack.io' }
-        }
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
     }
+}
 
-    dependencies {
-        implementation 'com.github.DigitalSmile:hexagon:0.1.2'
-    }
+dependencies {
+    implementation 'com.github.DigitalSmile:hexagon:{version}'
+}
 ```
 Maven:
 ```
-	<repositories>
-		<repository>
-		    <id>jitpack.io</id>
-		    <url>https://jitpack.io</url>
-		</repository>
-	</repositories>
-        ...
-        <dependency>
-            <groupId>com.github.DigitalSmile</groupId>
-            <artifactId>hexagon</artifactId>
-            <version>0.1.2</version>
-        </dependency>
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+...
+<dependency>
+    <groupId>com.github.DigitalSmile</groupId>
+    <artifactId>hexagon</artifactId>
+    <version>{version}</version>
+</dependency>
 ```
 Use a `HexagonGridBuilder` to create a grid or use `Hexagon` and `Operations` classes directly:
 ```
-        var hexagonGrid = new HexagonGrid.HexagonGridBuilder()
-                .hexagonShape(new HexagonalBounds(5))
-                .orientation(Orientation.FLAT)
-                .hexagonWidth(150)
-                .build();
-        hexagonGrid.generateHexagons();
-        var hexagonList = hexagonGrid.getHexagons();
+var hexagonGrid = new HexagonGrid.HexagonGridBuilder<>()
+                        .shape(new HexagonalShape(5), Orientation.FLAT) // hexagonal shape with radius of 5 hexagons and flat orientation
+                        .hexagonWidth(150)                              // width of hexagon in physical units
+                        .build();
+hexagonGrid.generateHexagons();
+var hexagonList = hexagonGrid.getHexagons(); // returns all generated hexagons
+var lineHexagonList = HexagonOperations.hexagonLinePath(new Hexagon(0,0,0), new Hexagon(0, -3, 3)); // returns hexagons, that are in line between two hexagons
 ```
 
 ## Next milestone - [Mercury](https://github.com/DigitalSmile/hexagon/milestone/1) ![GitHub milestone](https://img.shields.io/github/milestones/progress-percent/DigitalSmile/hexagon/1)

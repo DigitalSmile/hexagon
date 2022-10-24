@@ -1,6 +1,7 @@
-package org.digitalsmile.hexgrid.hexagon;
+package org.digitalsmile.hexgrid.operations;
 
 import org.digitalsmile.hexgrid.HexagonGrid;
+import org.digitalsmile.hexgrid.hexagon.Hexagon;
 
 /**
  * Utility hexagon class for interpolating and rounding physical coordinates (e.g. pixels) to exact hexagon on the {@link HexagonGrid}.
